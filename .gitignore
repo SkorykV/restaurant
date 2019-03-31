@@ -1,3 +1,6 @@
+#webstorm project dir
+.idea
+
 # Logs
 logs
 *.log
