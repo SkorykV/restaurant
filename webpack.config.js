@@ -5,7 +5,10 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.jsx',
+    entry: [
+        'babel-polyfill',
+        './src/index.jsx'
+    ],
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',

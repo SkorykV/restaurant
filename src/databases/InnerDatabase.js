@@ -19,13 +19,13 @@ export class InnerDatabase extends Database{
     }
 
     async getDish(restaurantId, categoryId, dishId) {
-        const restaurant = this.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
             const category = restaurant.menuCategories.find((category) => category.id === categoryId);
             if(category) {
                 const dish = category.dishes.find((dish) => dish.id === dishId);
                 if(dish) {
-                    return new Dish(dish.title, dish.description, dish.image, dish.weight, dish.price);
+                    return new Dish(dish.title, dish.image, dish.description, dish.weight, dish.price);
                 }
             }
         }

@@ -4,7 +4,7 @@ export class DishService {
         this.database = new DatabaseClass();
     }
 
-    async getDish() {
-        return await this.database.getDish();
+    async getDish(restaurantId, categoryId, dishId) {
+        return await this.database.getDish(restaurantId, categoryId, dishId);
     }
 }
