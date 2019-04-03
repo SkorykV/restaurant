@@ -1,10 +1,12 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { BrowserRouter } from "react-router-dom";
 
 import './styles/main.scss';
 
 import { InnerDatabase } from "./databases/InnerDatabase";
 import { LocalRequestsSender } from "./requestsSenders";
+import { App } from './components'
 
 InnerDatabase.initialize();
 
@@ -13,6 +15,8 @@ LocalRequestsSender
     .then((soup) => console.log(soup));
 
 ReactDOM.render(
-    <div>HELLO WORLD</div>,
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>,
     document.getElementById('root')
 );

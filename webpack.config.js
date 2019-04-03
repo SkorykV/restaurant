@@ -13,11 +13,13 @@ module.exports = {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js',
         library: 'home',
+        publicPath: '/',
     },
     watch: NODE_ENV === "development",
 
     devServer: {
-        contentBase: './build'
+        contentBase: './build',
+        historyApiFallback: true,
     },
 
     watchOptions: {
@@ -34,7 +36,7 @@ module.exports = {
                     {
                         loader: 'babel',
                         options: {
-                            presets: ["@babel/preset-env"],
+                            presets: ["@babel/preset-env", "@babel/preset-react"],
                         }
                     }
                 ],
@@ -53,6 +55,12 @@ module.exports = {
             {
                 test:/\.(s*)css$/,
                 use:['style-loader','css-loader', 'sass-loader']
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader'
+                    ]
             }
         ],
     },

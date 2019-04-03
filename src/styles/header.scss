@@ -1,0 +1,152 @@
+header {
+    position: relative;
+    background: black;
+    height: 50px;
+}
+
+.left-header {
+    position: absolute;
+    height: inherit;
+    left: 0;
+    top: 0;
+}
+
+.logo {
+    height: inherit;
+    float: left;
+    display: block;
+}
+
+.company-name {
+    float: left;
+    margin: 0;
+    background: linear-gradient(345deg, orange 50% ,orangered 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    line-height: 50px;
+}
+
+nav {
+    float: right;
+    height: 100%;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li{
+    position: relative;
+}
+
+nav li a, nav li span {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    color: orange;
+    text-decoration: none;
+}
+
+.main-menu {
+    cursor: pointer;
+}
+
+.main-menu>li {
+    height: 50px;
+    display: inline;
+}
+
+.main-menu > li > a, .main-menu > li > span  {
+    margin: 10px 0;
+    padding: 0 20px;
+    border-right: 1px solid orange;
+}
+
+.main-menu > li > a.selectedMenuItem {
+    color: red;
+}
+
+.main-menu > li:last-child > a {
+    border-right: none;
+}
+
+.sub-menu{
+    display: none;
+    position: absolute;
+    background: black;
+}
+
+li:hover > .sub-menu {
+    display: block;
+}
+
+.main-menu > li > .sub-menu {
+    top: 50px;
+    right: 1px;
+}
+
+.sub-menu .sub-menu {
+    right: 120px;
+    top: 0;
+    border-right: 1px solid orange;
+}
+
+.sub-menu li {
+    border-bottom: 1px solid orange;
+    text-align: center;
+    width: 120px;
+}
+
+.sub-menu li > a.selectedMenuItem {
+    color: red;
+}
+
+.sub-menu li > a:hover {
+    background: orange;
+    color: black;
+}
+
+.sub-menu li:last-child {
+    border-bottom: none;
+}
+
+.burger-menu {
+    display: none;
+}
+
+.burger-menu + label {
+    display: none;
+    float: right;
+    height: 25px;
+    width: 25px;
+    margin: 12.5px 20px;
+    border: 1px solid white;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.burger-menu + label > span {
+    display: block;
+    width: 15px;
+    margin: 5px auto 0 auto;
+    border-top: 1px solid white;
+    opacity: 1;
+    -webkit-transition: transform 2s, opacity 1s;
+    transition: transform 1s, opacity 0.5s;
+}
+
+.burger-menu:checked + label > span:first-child {
+    transform: translateY(5px) rotate(45deg);
+}
+
+.burger-menu:checked + label > span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu:checked + label > span:last-child {
+    transform: translateY(-5px) rotate(-45deg);
+}

@@ -1,11 +1,2 @@
-* {
-   margin: 0;
-   padding: 0;
- }
-
-body {
-  background: bisque;
-  #root {
-    background: aqua;
-  }
-}
+@import "normalize";
+@import "header";

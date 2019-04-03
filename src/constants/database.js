@@ -7,8 +7,8 @@ export const dbC = {
                     id: 'myFirstRestaurant',
                     menuCategories: [
                         {
-                            id: 'soupCategory',
-                            title: 'Супы',
+                            id: '0',
+                            title: 'Супи',
                             dishes: [
                                 {
                                     id: 'harcho',
@@ -18,6 +18,20 @@ export const dbC = {
                                     weight: 300,
                                     price: 80,
                                 }
+                            ]
+                        },
+                        {
+                            id: '1',
+                            title: 'Салати',
+                            dishes: [
+
+                            ]
+                        },
+                        {
+                            id: '2',
+                            title: 'Гарячі страви',
+                            dishes: [
+
                             ]
                         }
                     ]

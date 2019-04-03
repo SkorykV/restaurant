@@ -1,7 +1,7 @@
 
 export class Category {
-    constructor(title, dishes) {
+    constructor(id, title) {
+        this.id = id;
         this.title = title;
-        this.dishes = dishes;
     }
 }
