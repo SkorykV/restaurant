@@ -34,11 +34,11 @@ export class Category extends Component {
         if(this.state.isLoading) {
             return <h2>Почекайте, будь ласка, категорія меню завантажується</h2>
         }
-        if(!this.state.dishes){
+        if(!this.state.dishes.length){
             return <h2>Вибачте, але в даній категорії поки що не має страв</h2>
         }
         //TODO: check for better way of dynamic import
-        return <div className="category container">
+        return <div className="category">
             {
                 this.state.dishes.map(
                     dish =>

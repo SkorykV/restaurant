@@ -1,0 +1,68 @@
+@media only screen and (max-width: 660px) {
+
+  header .left-header {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  nav {
+    width: 100%;
+
+    .burger-menu + label {
+      display: block;
+    }
+
+    .burger-menu:checked ~ .main-menu {
+      display: block;
+    }
+
+    .main-menu {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+
+      li {
+        display: block;
+        height: auto;
+        border-bottom: 1px solid $gray-color;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        span {
+          padding: 0;
+          margin: 0;
+          border-bottom: 1px solid $gray-color;
+          cursor: auto;
+        }
+
+        a{
+          padding: 0;
+          margin: 0;
+          border-right: none;
+
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+
+    .sub-menu {
+      display: block;
+      position: initial;
+      background: none;
+      li {
+        width: 100%;
+      }
+    }
+  }
+
+}

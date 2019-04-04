@@ -1,0 +1,26 @@
+.dish {
+  display: flex;
+  color: $gray-color;
+
+  .dish-img {
+    flex: 0 0 48%;
+    img {
+      display:block;
+      margin: auto;
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+
+  .dish-info {
+    flex: 0 0 48%;
+    padding-left: 3%;
+    text-align: left;
+
+    .dish-title {
+      margin: 20px 0;
+      font-size: 28px;
+      font-weight: normal;
+    }
+  }
+}

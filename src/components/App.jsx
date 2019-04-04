@@ -6,6 +6,7 @@ import {
 
 import { Header } from './header'
 import {
+    Dish,
     Category,
     AboutUs,
     Events,
@@ -24,6 +25,10 @@ export class App extends Component {
         return <Category {...props} key={props.match.params.categoryId}/>
     }
 
+    static dishGenerator(props) {
+        return <Dish {...props} key={props.match.params.dishId}/>
+    }
+
     render() {
         return <div>
             <Header companyName={'Смачно'} />
@@ -32,7 +37,8 @@ export class App extends Component {
                     <Route path="/about" component={AboutUs} />
                     <Route path="/reservation" component={Reservation} />
                     <Route path="/events" component={Events} />
-                    <Route path="/category/:categoryId" render={App.categoryGenerator} />
+                    <Route exact path="/category/:categoryId" render={App.categoryGenerator} />
+                    <Route exact path="/category/:categoryId/dish/:dishId" render={App.dishGenerator} />
                 </Switch>
             </section>
         </div>

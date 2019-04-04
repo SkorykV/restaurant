@@ -52,19 +52,21 @@ export class Menu extends Component {
             }]
         }
 
-        return <nav>
-            {/*<input type="checkbox" className="burger-menu" id="burger-menu">
+        return (
+            <nav>
+                <input type="checkbox" className="burger-menu" id="burger-menu" />
                 <label htmlFor="burger-menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>*/}
+                    <span />
+                    <span />
+                    <span />
+                </label>
                 <ul className="main-menu">
                     <DropDownMenuItem active={true} text={'Меню'} items={menu}/>
                     <DefaultMenuItem active={false} link={'/events'} text={'Заходи'}/>
                     <DefaultMenuItem active={false} link={'/reservation'} text={'Забронювати столик'}/>
                     <DefaultMenuItem active={false} link={'/about'} text={'Про нас'}/>
                 </ul>
-        </nav>
+            </nav>
+        )
     }
 }

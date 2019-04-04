@@ -36,7 +36,7 @@ export class InnerDatabase extends Database{
     }
 
     async getCategories(restaurantId) {
-        await InnerDatabase.timer(3000);
+        await InnerDatabase.timer(1000);
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
             return restaurant.menuCategories.map(
@@ -47,6 +47,7 @@ export class InnerDatabase extends Database{
     }
 
     async getCategoryDishes(restaurantId, categoryId) {
+        await InnerDatabase.timer(1000);
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
             const category = restaurant.menuCategories.find((category) => category.id === categoryId);

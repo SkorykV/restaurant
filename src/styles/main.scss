@@ -1,7 +1,15 @@
+$gray-color: #7b7b7b;
+
 @import "normalize";
 @import "header";
 @import "mainBlock";
+@import "media";
 
 *{
   box-sizing: border-box;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
