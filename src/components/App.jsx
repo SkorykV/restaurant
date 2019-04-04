@@ -32,7 +32,7 @@ export class App extends Component {
                     <Route path="/about" component={AboutUs} />
                     <Route path="/reservation" component={Reservation} />
                     <Route path="/events" component={Events} />
-                    <Route path="/category/:categoryId" render={this.categoryGenerator} />
+                    <Route path="/category/:categoryId" render={App.categoryGenerator} />
                 </Switch>
             </section>
         </div>
