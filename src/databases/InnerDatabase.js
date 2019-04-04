@@ -28,7 +28,7 @@ export class InnerDatabase extends Database{
             if(category) {
                 const dish = category.dishes.find((dish) => dish.id === dishId);
                 if(dish) {
-                    return new Dish(dish.id, dish.title, dish.image, dish.description, dish.weight, dish.price);
+                    return new Dish(dish);
                 }
             }
         }
@@ -44,6 +44,19 @@ export class InnerDatabase extends Database{
             )
         }
         return null
+    }
+
+    async getCategoryDishes(restaurantId, categoryId) {
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            const category = restaurant.menuCategories.find((category) => category.id === categoryId);
+            if(category) {
+                return category.dishes.map(
+                    dish => (new Dish(dish)).getOverview()
+                )
+            }
+        }
+        return null;
     }
 
 }

@@ -8,4 +8,9 @@ export class LocalRequestsSender {
     static async getCategoriesRequest(restaurantId) {
         return await LocalHandler.getCategories(restaurantId);
     }
+
+    static async getCategoryDishesRequest(restaurantId, categoryId) {
+        return await LocalHandler.getCategoryDishes(restaurantId, categoryId);
+    }
+
 }

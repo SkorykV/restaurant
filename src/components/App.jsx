@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
     Route,
+    Switch,
 } from 'react-router-dom'
 
 import { Header } from './header'
@@ -19,15 +20,21 @@ export class App extends Component {
         }
     }
 
-
+    static categoryGenerator(props) {
+        return <Category {...props} key={props.match.params.categoryId}/>
+    }
 
     render() {
         return <div>
             <Header companyName={'Смачно'} />
-            <Route path="/category/:categoryId" component={Category} />
-            <Route path="/about" component={AboutUs} />
-            <Route path="/reservation" component={Reservation} />
-            <Route path="/events" component={Events} />
+            <section className="main-block">
+                <Switch>
+                    <Route path="/about" component={AboutUs} />
+                    <Route path="/reservation" component={Reservation} />
+                    <Route path="/events" component={Events} />
+                    <Route path="/category/:categoryId" render={this.categoryGenerator} />
+                </Switch>
+            </section>
         </div>
     }
 }

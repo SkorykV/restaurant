@@ -1,0 +1,58 @@
+.container {
+  width: 100%;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.category {
+  text-align: center;
+
+  .dishOverview {
+    display: inline-block;
+    width: 25%;
+    padding: 3%;
+    border: 2px solid rgba(134, 134, 134, 0);
+    transition: 0.5s border;
+    text-align: center;
+
+    &:hover {
+      border: 2px solid rgba(134, 134, 134, 0.5);
+    }
+
+    a {
+      display: block;
+      cursor: pointer;
+      text-decoration: none;
+      color: #7b7b7b;
+
+      .dish-img {
+        display:block;
+        width:100%;
+      }
+
+      .dish-title {
+        margin: 20px 0;
+        font-size: 22px;
+        font-weight: normal;
+      }
+
+      .dish-weight {
+        span {
+          display: inline-block;
+          padding: 5px;
+          background: #7b7b7b;
+          color: white;
+        }
+      }
+
+      .dish-price {
+        margin-top: 20px;
+      }
+
+    }
+  }
+}

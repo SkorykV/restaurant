@@ -1,4 +1,5 @@
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const NODE_ENV = process.env.NODE_ENV || "development";
@@ -28,6 +29,12 @@ module.exports = {
 
     devtool: NODE_ENV === "development" ? 'cheap-inline-module-source-map' : "source-map",
 
+    plugins: [
+        new CopyWebpackPlugin([
+            { from: './public' }
+        ])
+    ],
+
     module: {
         rules: [
             {
@@ -47,7 +54,7 @@ module.exports = {
                     {
                         loader: 'babel',
                         options: {
-                            presets: ["@babel/preset-env", "@babel/preset-react"],
+                            presets: ["@babel/preset-env", "@babel/preset-react", ],
                         }
                     }
                 ],

@@ -30,8 +30,6 @@ export class Menu extends Component {
                     })
                 );
 
-                console.log(menuCategories);
-
                 this.setState({
                     menuCategories,
                     isLoading: false,
