@@ -34,6 +34,67 @@ header {
     }
 }
 
+.search {
+    display: inline-block;
+    height: 50px;
+    margin-left: 15px;
+    position: relative;
+
+    $search-field-border: 2px;
+
+    .search-icon-container {
+        color: white;
+        padding-left: $search-field-border;
+        font-size: 30px;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+    .search-field-container {
+        position: absolute;
+        bottom: -50px;
+        width: 350px;
+        height: 50px;
+        background: black;
+        &.collapsed {
+            display: none;
+        }
+
+        .search-field {
+            height: 50px;
+            width: 300px;
+            padding: 5px;
+            line-height: 50px;
+            font-size: 20px;
+            border-width: 0 0 $search-field-border $search-field-border;
+            border-color: black;
+            color: black;
+            &:focus{
+                outline-width: 0;
+            }
+        }
+
+        .search-field-button {
+            position: absolute;
+            right:0;
+            top: 0;
+            height: 50px;
+            padding: 10px;
+
+            border: 0;
+
+            background: black;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            &:focus{
+                outline-width: 0;
+            }
+        }
+    }
+
+}
+
 nav {
     float: right;
     height: 100%;

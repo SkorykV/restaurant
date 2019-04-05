@@ -1,5 +1,5 @@
 export const servicesC = {
     pagination: {
-        onPage: 1,
+        onPage: 4,
     }
 };
