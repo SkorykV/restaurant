@@ -21,10 +21,6 @@ export class App extends Component {
         }
     }
 
-    static categoryGenerator(props) {
-        return <Category {...props} key={props.match.params.categoryId}/>
-    }
-
     static dishGenerator(props) {
         return <Dish {...props} key={props.match.params.dishId}/>
     }
@@ -37,7 +33,7 @@ export class App extends Component {
                     <Route path="/about" component={AboutUs} />
                     <Route path="/reservation" component={Reservation} />
                     <Route path="/events" component={Events} />
-                    <Route exact path="/category/:categoryId" render={App.categoryGenerator} />
+                    <Route exact path="/category/:categoryId" component={Category} />
                     <Route exact path="/category/:categoryId/dish/:dishId" render={App.dishGenerator} />
                 </Switch>
             </section>

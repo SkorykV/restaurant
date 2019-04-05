@@ -1,6 +1,7 @@
 $gray-color: #7b7b7b;
 
 @import "normalize";
+@import "pagination";
 @import "header";
 @import "mainBlock";
 @import "media";
@@ -8,6 +9,16 @@ $gray-color: #7b7b7b;
 *{
   box-sizing: border-box;
 }
+
+body {
+  color: $gray-color;
+}
+
+a {
+  text-decoration: none;
+  color: $gray-color;
+}
+
 .clearfix::after {
   content: "";
   clear: both;

@@ -12,9 +12,9 @@ export class LocalHandler {
         return await service.getCategories(restaurantId);
     }
 
-    static async getCategoryDishes(restaurantId, categoryId) {
+    static async getCategoryDishes(restaurantId, categoryId, page) {
         const service = new CategoryService(DatabaseImplementation);
-        return await service.getCategoryDishes(restaurantId, categoryId);
+        return await service.getCategoryDishes(restaurantId, categoryId, page);
     }
 
 }

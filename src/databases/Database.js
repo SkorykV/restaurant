@@ -5,7 +5,7 @@ export class Database {
     async getCategories(restaurantId) {
         throw new Error("get categories is not implemented")
     }
-    async getCategoryDishes(restaurantId, categoryId) {
+    async getCategoryDishes(restaurantId, categoryId, page, onPage) {
         throw new Error("get category dishes is not implemented")
     }
 }

@@ -1,0 +1,17 @@
+.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  li {
+    display: inline-block;
+    margin-right: 10px;
+    list-style: none;
+    &:last-of-type {
+      margin: 0;
+    }
+    &.currentPage {
+      font-weight: bold;
+      color: black;
+    }
+  }
+}

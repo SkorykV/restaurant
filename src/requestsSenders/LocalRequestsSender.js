@@ -9,8 +9,7 @@ export class LocalRequestsSender {
         return await LocalHandler.getCategories(restaurantId);
     }
 
-    static async getCategoryDishesRequest(restaurantId, categoryId) {
-        return await LocalHandler.getCategoryDishes(restaurantId, categoryId);
+    static async getCategoryDishesRequest(restaurantId, categoryId, page) {
+        return await LocalHandler.getCategoryDishes(restaurantId, categoryId, page);
     }
-
 }
