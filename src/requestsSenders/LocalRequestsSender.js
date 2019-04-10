@@ -12,4 +12,8 @@ export class LocalRequestsSender {
     static async getCategoryDishesRequest(restaurantId, categoryId, page) {
         return await LocalHandler.getCategoryDishes(restaurantId, categoryId, page);
     }
+
+    static async getDishesByQueryRequest(restaurantId, queryString) {
+        return await LocalHandler.getDishesByQuery(restaurantId, queryString);
+    }
 }

@@ -5,18 +5,22 @@ import PropTypes from 'prop-types';
 
 export class SearchField extends Component {
 
+    static handleSearchFieldClick(event){
+        event.nativeEvent.stopImmediatePropagation()
+    }
+
     constructor(props){
         super(props);
 
         this.handleCollapse = this.handleCollapse.bind(this);
+        this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this);
 
         this.state = {
             collapsed: true,
         };
     }
 
-    handleCollapse(event) {
-        const eventTarget = event.currentTarget;
+    handleCollapse() {
 
         this.setState({
             collapsed: !this.state.collapsed,
@@ -26,11 +30,12 @@ export class SearchField extends Component {
             }
             else {
                 document.addEventListener('click', this.handleCollapse);
-                eventTarget.parentNode
-                    .getElementsByClassName("search-field-container")[0]
-                    .addEventListener('click', (event) => { event.stopPropagation()});
             }
         });
+    }
+
+    handleSearchFieldChange(event) {
+        this.props.onChange(event.target.value);
     }
 
     componentWillUnmount() {
@@ -44,26 +49,47 @@ export class SearchField extends Component {
                     <div className="search-icon-container" onClick={this.handleCollapse}>
                         <FontAwesomeIcon className="search-icon" icon={faSearch} />
                     </div>
-                    <div className={"search-field-container" + (this.state.collapsed ? " collapsed": '')}>
-                        <input className="search-field" type="text" value={this.props.value} onChange={this.props.onChange}/>
-                        <button type="submit" className="search-field-button">
-                            <FontAwesomeIcon className="search-icon" icon={faSearch} />
-                        </button>
+                    <div
+                        onClick={SearchField.handleSearchFieldClick}
+                        className={"search-field-container" + (this.state.collapsed ? " collapsed": '')}>
+                        <div>
+                            <input
+                                className={"search-field" + (!this.props.history.length ? " no-history" : '')}
+                                type="text"
+                                value={this.props.value}
+                                placeholder={this.props.placeholder}
+                                onChange={this.handleSearchFieldChange}
+                            />
+                            <button type="submit" className="search-field-button">
+                                <FontAwesomeIcon className="search-icon" icon={faSearch} />
+                            </button>
+                        </div>
+                        <ul className="search-field-history">
+                            {
+                                this.props.history.map(
+                                    variant => <li key={variant} onClick={() => this.props.onChange(variant)}>{variant}</li>
+                                )
+                            }
+                        </ul>
                     </div>
                 </form>
             </div>
         )
     }
-};
+}
 
 SearchField.propTypes = {
     value: PropTypes.string,
+    history: PropTypes.array,
+    placeholder: PropTypes.string,
     onChange: PropTypes.func,
     onSubmit: PropTypes.func,
 };
 
 SearchField.defaultProps = {
     value: '',
+    history: [],
+    placeholder: 'Query string',
     onChange: f => f,
     onSubmit: f => f,
 };

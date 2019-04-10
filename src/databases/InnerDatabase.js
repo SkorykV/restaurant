@@ -63,4 +63,22 @@ export class InnerDatabase extends Database{
         return null;
     }
 
+    async getDishesByQuery(restaurantId, queryString) {
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            return restaurant.menuCategories.flatMap(
+                category => (
+                    category.dishes
+                        .filter(
+                            dish => dish.title.toLowerCase().includes(queryString.toLowerCase())
+                        )
+                        .map(
+                            dish => new Dish(dish).getOverview()
+                        )
+                )
+            )
+        }
+        return null
+    }
+
 }

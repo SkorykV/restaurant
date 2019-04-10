@@ -63,14 +63,16 @@ header {
         .search-field {
             height: 50px;
             width: 300px;
-            padding: 5px;
-            line-height: 50px;
+            padding: 5px calc((30px - #{$search-field-border})/2);
             font-size: 20px;
-            border-width: 0 0 $search-field-border $search-field-border;
+            border-width: 0 0 0 $search-field-border;
             border-color: black;
             color: black;
             &:focus{
                 outline-width: 0;
+            }
+            &.no-history {
+                border-bottom-width: $search-field-border;
             }
         }
 
@@ -89,6 +91,30 @@ header {
             cursor: pointer;
             &:focus{
                 outline-width: 0;
+            }
+        }
+
+        .search-field-history {
+            display: block;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: calc(300px + #{$search-field-border});
+            cursor: pointer;
+            border-width: 0 $search-field-border;
+            border-color: black;
+            border-style: solid;
+            li {
+                height: 30px;
+                font-size: 20px;
+                padding: 5px;
+                border-bottom: 1px solid black;
+                background-color: $light-gray-color;
+                color: black;
+
+                &:last-of-type {
+                    border-bottom-width: $search-field-border;
+                }
             }
         }
     }
