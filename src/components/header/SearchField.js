@@ -14,9 +14,12 @@ export class SearchField extends Component {
 
         this.handleCollapse = this.handleCollapse.bind(this);
         this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this);
+        this.handleHistoryValueSelected = this.handleHistoryValueSelected.bind(this);
+        this.handleSearchFieldSubmit = this.handleSearchFieldSubmit.bind(this);
 
         this.state = {
             collapsed: true,
+            searchValue: '',
         };
     }
 
@@ -35,7 +38,18 @@ export class SearchField extends Component {
     }
 
     handleSearchFieldChange(event) {
-        this.props.onChange(event.target.value);
+        this.setState({ searchValue: event.target.value });
+    }
+
+    handleHistoryValueSelected(event) {
+        this.setState({ searchValue: event.target.innerHTML });
+    }
+
+    handleSearchFieldSubmit(event) {
+        event.preventDefault();
+        this.handleCollapse();
+        this.props.onSubmit(this.state.searchValue);
+        this.setState({ searchValue: '' });
     }
 
     componentWillUnmount() {
@@ -43,9 +57,13 @@ export class SearchField extends Component {
     }
 
     render() {
+        const history = this.props.history.filter(
+            s => s.includes(this.state.searchValue.trim())
+        );
+
         return (
             <div className="search">
-                <form onSubmit={this.props.onSubmit}>
+                <form onSubmit={this.handleSearchFieldSubmit}>
                     <div className="search-icon-container" onClick={this.handleCollapse}>
                         <FontAwesomeIcon className="search-icon" icon={faSearch} />
                     </div>
@@ -54,9 +72,9 @@ export class SearchField extends Component {
                         className={"search-field-container" + (this.state.collapsed ? " collapsed": '')}>
                         <div>
                             <input
-                                className={"search-field" + (!this.props.history.length ? " no-history" : '')}
+                                className={"search-field" + (!history.length ? " no-history" : '')}
                                 type="text"
-                                value={this.props.value}
+                                value={this.state.searchValue}
                                 placeholder={this.props.placeholder}
                                 onChange={this.handleSearchFieldChange}
                             />
@@ -66,8 +84,8 @@ export class SearchField extends Component {
                         </div>
                         <ul className="search-field-history">
                             {
-                                this.props.history.map(
-                                    variant => <li key={variant} onClick={() => this.props.onChange(variant)}>{variant}</li>
+                                history.map(
+                                    variant => <li key={variant} onClick={this.handleHistoryValueSelected}>{variant}</li>
                                 )
                             }
                         </ul>

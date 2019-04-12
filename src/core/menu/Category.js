@@ -5,11 +5,3 @@ export class Category {
         this.title = title;
     }
 }
-
-export class CategoryPage {
-    constructor(title, dishes, totalPages) {
-        this.title = title;
-        this.dishes = dishes;
-        this.totalPages = totalPages;
-    }
-}

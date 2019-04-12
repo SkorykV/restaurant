@@ -10,14 +10,14 @@ import {
     Category,
     AboutUs,
     Events,
-    Reservation
+    Reservation,
+    SearchResults
 } from "./mainBlock";
 
 export class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
         }
     }
 
@@ -33,6 +33,7 @@ export class App extends Component {
                     <Route path="/about" component={AboutUs} />
                     <Route path="/reservation" component={Reservation} />
                     <Route path="/events" component={Events} />
+                    <Route path="/search" component={SearchResults} />
                     <Route exact path="/category/:categoryId" component={Category} />
                     <Route exact path="/category/:categoryId/dish/:dishId" render={App.dishGenerator} />
                 </Switch>

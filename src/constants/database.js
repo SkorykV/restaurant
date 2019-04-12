@@ -1,3 +1,5 @@
+import { servicesC } from "./services";
+
 export const dbC = {
     innerDb: {
         key: 'database',
@@ -5,6 +7,8 @@ export const dbC = {
             restaurants: [
                 {
                     id: 'myFirstRestaurant',
+                    type: servicesC.restaurantTypes.rectangle,
+                    size: { width: 10, height: 10},
                     menuCategories: [
                         {
                             id: '0',
@@ -77,6 +81,96 @@ export const dbC = {
 
                             ]
                         }
+                    ],
+                    tables: [
+                        {
+                            id: "table1",
+                            number: 1,
+                            type: servicesC.restaurantTypes.rectangle,
+                            size: {
+                                width: 2,
+                                height: 1.2,
+                            },
+                            position: { x: 0, y: 0.5},
+                            reservations: []
+                        },
+                        {
+                            id: "table2",
+                            number: 2,
+                            type: servicesC.restaurantTypes.rectangle,
+                            size: {
+                                width: 2,
+                                height: 1.2,
+                            },
+                            position: { x: 0, y: 2.7},
+                            reservations: []
+                        },
+                        {
+                            id: "table3",
+                            number: 3,
+                            type: servicesC.restaurantTypes.rectangle,
+                            size: {
+                                width: 2,
+                                height: 1.2,
+                            },
+                            position: { x: 0, y: 6.1},
+                            reservations: []
+                        },
+                        {
+                            id: "table4",
+                            number: 4,
+                            type: servicesC.restaurantTypes.rectangle,
+                            size: {
+                                width: 2,
+                                height: 1.2,
+                            },
+                            position: { x: 0, y: 8.3},
+                            reservations: []
+                        },
+                        {
+                            id: "table5",
+                            number: 5,
+                            type: servicesC.restaurantTypes.rectangle,
+                            size: {
+                                width: 2,
+                                height: 1.2,
+                            },
+                            position: { x: 8, y: 0.5},
+                            reservations: []
+                        },
+                        {
+                            id: "table6",
+                            number: 6,
+                            type: servicesC.restaurantTypes.rectangle,
+                            size: {
+                                width: 2,
+                                height: 1.2,
+                            },
+                            position: { x: 8, y: 2.7},
+                            reservations: []
+                        },
+                        {
+                            id: "table7",
+                            number: 7,
+                            type: servicesC.restaurantTypes.rectangle,
+                            size: {
+                                width: 2,
+                                height: 1.2,
+                            },
+                            position: { x: 8, y: 6.1},
+                            reservations: []
+                        },
+                        {
+                            id: "table8",
+                            number: 8,
+                            type: servicesC.restaurantTypes.rectangle,
+                            size: {
+                                width: 2,
+                                height: 1.2,
+                            },
+                            position: { x: 8, y: 8.3},
+                            reservations: []
+                        },
                     ]
                 }
             ]

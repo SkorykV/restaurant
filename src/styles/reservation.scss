@@ -1,0 +1,18 @@
+.restaurant {
+  width: 500px;
+  height: 500px;
+  position: relative;
+  border: 1px solid black;
+  .table {
+    position: absolute;
+    display: table;
+    text-align: center;
+    border: 1px solid black;
+    color: black;
+    cursor: pointer;
+    .table-number {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+}

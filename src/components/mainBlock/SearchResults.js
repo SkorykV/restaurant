@@ -6,7 +6,7 @@ import { simpleSearchParamsParse } from '../../lib';
 import { uiC } from "../../constants";
 import {DishOverview} from "./DishOverview";
 
-export class Category extends Component {
+export class SearchResults extends Component {
 
     constructor(props) {
         super(props);
@@ -30,8 +30,13 @@ export class Category extends Component {
             currentPage = Number.isFinite(n) ? n : currentPage;
         }
 
-        const categoryId = this.props.match.params.categoryId;
-        LocalRequestsSender.getCategoryDishesRequest('myFirstRestaurant', categoryId, currentPage).then(
+        const requestParams = {
+            query: params.query,
+            page: currentPage,
+            onPage: uiC.pagination.onPage,
+        };
+
+        LocalRequestsSender.getDishesByParamsRequest('myFirstRestaurant', requestParams).then(
             data => {
 
                 this.setState({
@@ -43,6 +48,7 @@ export class Category extends Component {
             },
             error => { this.setState({isLoading: false, error })}
         );
+
     }
 
     componentDidMount() {
@@ -56,36 +62,44 @@ export class Category extends Component {
     }
 
     render() {
-        const categoryId = this.props.match.params.categoryId;
+
+
         if(this.state.isLoading) {
-            return <h2>Почекайте, будь ласка, категорія меню завантажується</h2>
+            return <h2>Почекайте, будь ласка, результати пошуку завантажуються</h2>
         }
         if(this.state.error){
             return <h2>Вибачте, щось пішло не так</h2>
         }
         if(!this.state.dishes.length){
             if(this.state.totalPages === 0) {
-                return <h2>Вибачте, але в даній категорії поки що немає страв</h2>
+                return <h2>Вибачте, але за вашим запитом нічого не знайдено</h2>
             }
-            return <h2>Вибачте, але в даній категорії замало страв</h2>
+            return <h2>Вибачте, але результатів пошуку замало</h2>
         }
-        return <div className="category">
-            <div className="category-content">
-                {
-                    this.state.dishes.map(
-                        dish =>
-                            <DishOverview categoryId={categoryId} dish={dish} key={dish.id}/>
-                    )
-                }
-            </div>
-            <div className="category-pagination">
-                <Pagination
-                    currentPage={this.state.currentPage}
-                    displayAround={uiC.pagination.pagesAround}
-                    countPages={this.state.totalPages}
-                />
-            </div>
+        return (
+            <div className="clearfix">
+                <div className="search-results">
+                    <div className="search-results-content">
+                        {
+                            this.state.dishes.map(
+                                _ => (
+                                    <DishOverview categoryId={_.categoryId} dish={_.dish} key={_.dish.id} />
+                                )
+                            )
+                        }
+                    </div>
+                    <div className="search-results-pagination">
+                        <Pagination
+                            currentPage={this.state.currentPage}
+                            displayAround={uiC.pagination.pagesAround}
+                            countPages={this.state.totalPages}
+                        />
+                    </div>
+                </div>
+                <div className="search-filters">
 
-        </div>
+                </div>
+            </div>
+        )
     }
 }

@@ -6,6 +6,7 @@ $light-gray-color: #DCDCDC;
 @import "header";
 @import "mainBlock";
 @import "media";
+@import "reservation";
 
 *{
   box-sizing: border-box;
@@ -25,3 +26,4 @@ a {
   clear: both;
   display: table;
 }
+

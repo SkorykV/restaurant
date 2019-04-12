@@ -17,9 +17,13 @@ export class LocalHandler {
         return await service.getCategoryDishes(restaurantId, categoryId, page);
     }
 
-    static async getDishesByQuery(restaurantId, queryString) {
+    static async getDishesByParams(restaurantId, params) {
         const service = new RestaurantService(DatabaseImplementation);
-        return await service.getDishesByQuery(restaurantId, queryString);
+        return await service.getDishesByParams(restaurantId, params);
     }
 
+    static async getRestaurantStructure(restaurantId) {
+        const service = new RestaurantService(DatabaseImplementation);
+        return await service.getRestaurantStructure(restaurantId);
+    }
 }

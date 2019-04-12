@@ -8,7 +8,10 @@ export class Database {
     async getCategoryDishes(restaurantId, categoryId, page, onPage) {
         throw new Error("get category dishes is not implemented")
     }
-    async getDishesByQuery(restaurantId, queryString) {
-        throw new Error("get dish by query is not implemented")
+    async getDishesByParams(restaurantId, query, page, onPage) {
+        throw new Error("get dish by params is not implemented")
+    }
+    async getRestaurantStructure(restaurantId) {
+        throw new Error("get restaurant structure by params is not implemented")
     }
 }

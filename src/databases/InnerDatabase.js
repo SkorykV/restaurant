@@ -1,7 +1,9 @@
 import { dbC } from "../constants";
-import {Category, CategoryPage, Dish} from "../core/menu";
+import {Category, Dish} from "../core/menu";
 
 import {Database} from "./Database";
+import {ContentPage} from "../core/pagination";
+import {RestaurantStructure} from "../core/RestaurantStructure";
 
 
 export class InnerDatabase extends Database{
@@ -57,26 +59,44 @@ export class InnerDatabase extends Database{
                 );
                 const totalPages = Math.ceil(category.dishes.length / onPage);
                 // TODO: review if will not have title anywhere, dont return it from database
-                return new CategoryPage(category.title, dishes, totalPages);
+                return new ContentPage({title: category.title, dishes}, totalPages);
             }
         }
         return null;
     }
 
-    async getDishesByQuery(restaurantId, queryString) {
+    async getDishesByParams(restaurantId, query, page, onPage) {
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
-            return restaurant.menuCategories.flatMap(
+            const dishes =  restaurant.menuCategories.flatMap(
                 category => (
                     category.dishes
                         .filter(
-                            dish => dish.title.toLowerCase().includes(queryString.toLowerCase())
+                            dish => dish.title.toLowerCase().includes(query.toLowerCase())
                         )
                         .map(
-                            dish => new Dish(dish).getOverview()
+                            dish => ({ categoryId: category.id, dish: new Dish(dish).getOverview() })
                         )
                 )
-            )
+            );
+            if(page && onPage) {
+                const from = onPage * (page - 1);
+                const to = from + onPage;
+                const totalPages = Math.ceil(dishes.length / onPage);
+                return new ContentPage({dishes: dishes.slice(from, to) }, totalPages)
+            }
+            else {
+                return dishes;
+            }
+        }
+        return null
+    }
+
+    async getRestaurantStructure(restaurantId) {
+        await InnerDatabase.timer(1000);
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            return new RestaurantStructure(restaurant.type, restaurant.size, restaurant.tables);
         }
         return null
     }

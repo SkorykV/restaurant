@@ -10,10 +10,26 @@ export class LocalRequestsSender {
     }
 
     static async getCategoryDishesRequest(restaurantId, categoryId, page) {
-        return await LocalHandler.getCategoryDishes(restaurantId, categoryId, page);
+        const response = await LocalHandler.getCategoryDishes(restaurantId, categoryId, page);
+        if(response === null) {
+            throw new Error('something went wrong')
+        }
+        return response;
     }
 
-    static async getDishesByQueryRequest(restaurantId, queryString) {
-        return await LocalHandler.getDishesByQuery(restaurantId, queryString);
+    static async getDishesByParamsRequest(restaurantId, params) {
+        const response = await LocalHandler.getDishesByParams(restaurantId, params);
+        if(response === null) {
+            throw new Error('something went wrong')
+        }
+        return response;
+    }
+
+    static async getRestaurantStructureRequest(restaurantId) {
+        const response = await LocalHandler.getRestaurantStructure(restaurantId);
+        if(response === null) {
+            throw new Error('something went wrong')
+        }
+        return response;
     }
 }

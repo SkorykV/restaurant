@@ -55,6 +55,7 @@ header {
         bottom: -50px;
         width: 350px;
         height: 50px;
+        z-index: 1;
         background: black;
         &.collapsed {
             display: none;
@@ -166,6 +167,7 @@ nav {
 
     .sub-menu{
         display: none;
+        z-index: 1;
 
         position: absolute;
         top: 50px;
