@@ -18,10 +18,10 @@ export class InnerDatabase extends Database{
         return JSON.parse(localStorage.getItem(dbC.innerDb.key));
     }
 
-    // TODO: delete this method
+    /*// TODO: delete this method
     static timer(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    }*/
 
     async getDish(restaurantId, categoryId, dishId) {
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
@@ -48,7 +48,6 @@ export class InnerDatabase extends Database{
     }
 
     async getCategoryDishes(restaurantId, categoryId, page, onPage) {
-        await InnerDatabase.timer(1000);
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
             const category = restaurant.menuCategories.find((category) => category.id === categoryId);
@@ -93,7 +92,6 @@ export class InnerDatabase extends Database{
     }
 
     async getRestaurantStructure(restaurantId) {
-        await InnerDatabase.timer(1000);
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
             return new RestaurantStructure(restaurant.type, restaurant.size, restaurant.tables);

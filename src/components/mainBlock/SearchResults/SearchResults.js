@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 
-import {LocalRequestsSender} from "../../requestsSenders";
-import {Pagination} from "../pagination";
-import { simpleSearchParamsParse } from '../../lib';
-import { uiC } from "../../constants";
-import {DishOverview} from "./DishOverview";
+import {LocalRequestsSender} from "../../../requestsSenders";
+
+import {FilterForm, FiltersForm} from "./FiltersForm";
+import {Pagination} from "../../pagination";
+import { simpleSearchParamsParse } from '../../../lib';
+import { uiC } from "../../../constants";
+import {DishOverview} from "../DishOverview";
 
 export class SearchResults extends Component {
 
@@ -97,7 +99,7 @@ export class SearchResults extends Component {
                     </div>
                 </div>
                 <div className="search-filters">
-
+                    <FiltersForm />
                 </div>
             </div>
         )

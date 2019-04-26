@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 
-import {LocalRequestsSender} from "../../requestsSenders";
+import {LocalRequestsSender} from "../../../requestsSenders";
+
+import { Restaurant } from './Restaurant'
+import { ReservationTimeFilter } from "./ReservationTimeFilter";
 
 export class Reservation extends Component {
 
@@ -40,27 +43,9 @@ export class Reservation extends Component {
         }
 
         return (
-            <div className="restaurant">
-                {
-                    restaurantStructure.tables.map(
-                        table => {
-                            const x = table.position.x / restaurantStructure.size.width * 100;
-                            const y = table.position.y / restaurantStructure.size.width * 100;
-                            const width = table.size.width / restaurantStructure.size.width * 100;
-                            const height = table.size.height / restaurantStructure.size.width * 100;
-
-                            const style = {left: `${x}%`, bottom:`${y}%`, width: `${width}%`, height: `${height}%`};
-
-                            console.log(style);
-
-                            return (
-                                <div style={style} className="table" key={table.id}>
-                                    <span className="table-number">{table.number}</span>
-                                </div>
-                            )
-                        }
-                    )
-                }
+            <div>
+                <Restaurant restaurantStructure={restaurantStructure}/>
+                <ReservationTimeFilter />
             </div>
         )
     }

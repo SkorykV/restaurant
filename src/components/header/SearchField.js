@@ -97,17 +97,13 @@ export class SearchField extends Component {
 }
 
 SearchField.propTypes = {
-    value: PropTypes.string,
     history: PropTypes.array,
     placeholder: PropTypes.string,
-    onChange: PropTypes.func,
     onSubmit: PropTypes.func,
 };
 
 SearchField.defaultProps = {
-    value: '',
     history: [],
     placeholder: 'Query string',
-    onChange: f => f,
     onSubmit: f => f,
 };

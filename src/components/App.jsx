@@ -10,9 +10,15 @@ import {
     Category,
     AboutUs,
     Events,
-    Reservation,
-    SearchResults
 } from "./mainBlock";
+
+import {
+    Reservation
+} from './mainBlock/ReservationPage'
+
+import {
+    SearchResults
+} from "./mainBlock/SearchResults";
 
 export class App extends Component {
     constructor(props) {
