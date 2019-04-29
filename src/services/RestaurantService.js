@@ -6,8 +6,10 @@ export class RestaurantService extends BaseService{
         return await this.database.getCategories(restaurantId);
     }
 
-    async getDishesByParams(restaurantId, {query = '', page = null, onPage = null}) {
-        return await this.database.getDishesByParams(restaurantId, query, page, onPage);
+    async getDishesByParams(restaurantId,
+                            {query='', filters=null} = { query:'', filters:null},
+                            {getFilters=false, page=null, onPage=null} = {getFilters:false, page:null, onPage:null}) {
+        return await this.database.getDishesByParams(restaurantId, query, filters, getFilters, page, onPage);
     }
 
     async getRestaurantStructure(restaurantId) {

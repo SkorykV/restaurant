@@ -50,6 +50,10 @@
 .search-filters {
   float: left;
   width: 40%;
+  padding: 20px 50px;
   border: 1px solid black;
-  height: 200px;
+  .filters-title {
+    margin-top: 0;
+    text-align: center;
+  }
 }

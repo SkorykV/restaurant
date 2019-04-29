@@ -2,6 +2,11 @@ import React, {Component} from 'react'
 
 
 export class Marker extends Component {
+
+    static handleMarkerClick(e) {
+        e.stopPropagation();
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -18,6 +23,13 @@ export class Marker extends Component {
             document.addEventListener('mouseup', this.handleMouseUp );
         }
         else if(prevState.dragging && !this.state.dragging) {
+            document.removeEventListener('mousemove', this.props.onMove );
+            document.removeEventListener('mouseup', this.handleMouseUp );
+        }
+    }
+
+    componentWillUnmount() {
+        if(this.state.dragging) {
             document.removeEventListener('mousemove', this.props.onMove );
             document.removeEventListener('mouseup', this.handleMouseUp );
         }
@@ -43,7 +55,8 @@ export class Marker extends Component {
         return (
             <span
                 className={"rangeMark" + (selected ? " selected" : '')}
-                onMouseDown={this.handleMouseDown}
+                onMouseDown={this.props.enabled ? this.handleMouseDown : null}
+                onClick={this.props.enabled ? Marker.handleMarkerClick : null}
                 style={{marginLeft: -size / 2, left: `${position}%`, width: size, height: size}}
             />
         )

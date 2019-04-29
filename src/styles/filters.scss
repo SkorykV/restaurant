@@ -1,5 +1,5 @@
 .rangeFilterContainer {
-  margin: 20px 50px;
+  margin: 20px 0;
   .rangeFilter {
     position: relative;
     margin: 20px 0;
@@ -11,7 +11,7 @@
       top: 0;
       height: 100%;
       z-index: 1;
-      background-color: #369;
+      background-color: $dark-blue-color;
     }
 
     .rangeMark {
@@ -19,8 +19,6 @@
       top: -6.5px;
       z-index: 2;
       background: #76c7e1;
-      -webkit-box-shadow: inset 0 -2px 0 0 #64a9bf;
-      box-shadow: inset 0 -2px 0 0 #64a9bf;
 
       user-select: none;
       -moz-user-select: none;
@@ -31,7 +29,8 @@
 
     .rangeMark.selected {
       z-index: 3;
-      background: blue;
+      -webkit-box-shadow: 0 0 5px #64a9bf;
+      box-shadow: 0 0 5px #64a9bf;
     }
 
   }
@@ -39,8 +38,63 @@
     display: flex;
     justify-content: space-between;
     .boundaryInput {
-      width: 50px;
+      min-width: 50px;
+      max-width: 75px;
     }
+  }
+}
+.checkbox-count {
+  margin: 10px 0;
+  label {
+    position: relative;
+    height: 20px;
+    display: flex;
+    align-items: flex-end;
+
+    input {
+      display: none;
+    }
+
+    .checkmark {
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      display: inline-block;
+
+      width: 20px;
+      height: 20px;
+      border: 2px solid $dark-blue-color;
+
+      &::after {
+        content: "";
+        position: absolute;
+        display: none;
+
+        left: 4px;
+        top: 0;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+
+    input:checked + .checkmark {
+      background-color: $dark-blue-color;
+      &::after{
+        display: block;
+      }
+    }
+
+    .label-text {
+      margin-left: 25px;
+      font-size: 1em;
+    }
+
   }
 }
 

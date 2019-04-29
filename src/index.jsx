@@ -5,14 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import './styles/main.scss';
 
 import { InnerDatabase } from "./databases/InnerDatabase";
-import { LocalRequestsSender } from "./requestsSenders";
 import { App } from './components'
 
 InnerDatabase.initialize();
-
-LocalRequestsSender
-    .getDishRequest('myFirstRestaurant', 'soupCategory', 'harcho')
-    .then((soup) => console.log(soup));
 
 ReactDOM.render(
     <BrowserRouter>

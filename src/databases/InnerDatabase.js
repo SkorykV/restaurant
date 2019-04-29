@@ -18,10 +18,10 @@ export class InnerDatabase extends Database{
         return JSON.parse(localStorage.getItem(dbC.innerDb.key));
     }
 
-    /*// TODO: delete this method
+    // TODO: delete this method
     static timer(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
-    }*/
+    }
 
     async getDish(restaurantId, categoryId, dishId) {
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
@@ -47,6 +47,17 @@ export class InnerDatabase extends Database{
         return null
     }
 
+    async getCategoryTitle(restaurantId, categoryId) {
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            const category = restaurant.menuCategories.find((category) => category.id === categoryId);
+            if(category) {
+                return category.title;
+            }
+        }
+        return null
+    }
+
     async getCategoryDishes(restaurantId, categoryId, page, onPage) {
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
@@ -64,10 +75,11 @@ export class InnerDatabase extends Database{
         return null;
     }
 
-    async getDishesByParams(restaurantId, query, page, onPage) {
+    async getDishesByParams(restaurantId, query, filters, getFilters, page, onPage) {
+        await InnerDatabase.timer(1000);
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
-            const dishes =  restaurant.menuCategories.flatMap(
+            let results =  restaurant.menuCategories.flatMap(
                 category => (
                     category.dishes
                         .filter(
@@ -78,15 +90,88 @@ export class InnerDatabase extends Database{
                         )
                 )
             );
+
+            const content = {};
+            if(getFilters) {
+                if(results.length !== 0){
+                    const ranges = {
+                        price: {from: results[0].dish.price, to: results[0].dish.price},
+                        weight: {from: results[0].dish.weight, to: results[0].dish.weight},
+                    };
+                    results.forEach(
+                        result => {
+                            if(result.dish.price < ranges.price.from) {
+                                ranges.price.from = result.dish.price
+                            }
+                            else if(result.dish.price > ranges.price.to) {
+                                ranges.price.to = result.dish.price
+                            }
+
+                            if(result.dish.weight < ranges.weight.from) {
+                                ranges.weight.from = result.dish.weight
+                            }
+                            else if(result.dish.weight > ranges.weight.to) {
+                                ranges.weight.to = result.dish.weight
+                            }
+                        }
+                    );
+                    const categories = {};
+                    for(const result of results) {
+                        if(categories[result.categoryId]) {
+                            categories[result.categoryId].count += 1
+                        }
+                        else {
+                            const title = await this.getCategoryTitle(restaurantId, result.categoryId);
+                            categories[result.categoryId] = {
+                                title,
+                                count: 1,
+                            }
+                        }
+                    }
+                    content.filters = {...ranges, categories}
+                }
+                else {
+                    content.filters = null;
+                }
+            }
+
+            if(filters) {
+                const {price, weight, categories} = filters;
+                if(price) {
+                    results = results.filter(
+                        result => {
+                            return result.dish.price >= price.from && result.dish.price <= price.to
+                        }
+                    )
+                }
+                if(weight) {
+                    results = results.filter(
+                        result => {
+                            return result.dish.weight >= weight.from && result.dish.weight <= weight.to
+                        }
+                    )
+                }
+                if(categories) {
+                    results = results.filter(
+                        result => {
+                            return  categories.indexOf(result.categoryId) !== -1
+                        }
+                    )
+                }
+            }
+
             if(page && onPage) {
                 const from = onPage * (page - 1);
                 const to = from + onPage;
-                const totalPages = Math.ceil(dishes.length / onPage);
-                return new ContentPage({dishes: dishes.slice(from, to) }, totalPages)
+                const totalPages = Math.ceil(results.length / onPage);
+                content.results = results.slice(from, to);
+                content.totalPages = totalPages;
             }
             else {
-                return dishes;
+                content.results = results
             }
+
+            return content
         }
         return null
     }

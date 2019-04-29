@@ -35,8 +35,6 @@ class HeaderComponent extends Component {
         const searchParams = {
             query: searchValue,
         };
-
-        console.log(`/search${createSearchStrFromObj(searchParams)}`);
         this.props.history.push(`/search${createSearchStrFromObj(searchParams)}`)
     }
 

@@ -17,8 +17,8 @@ export class LocalRequestsSender {
         return response;
     }
 
-    static async getDishesByParamsRequest(restaurantId, params) {
-        const response = await LocalHandler.getDishesByParams(restaurantId, params);
+    static async getDishesByParamsRequest(restaurantId, requestParams, responseParams) {
+        const response = await LocalHandler.getDishesByParams(restaurantId, requestParams, responseParams);
         if(response === null) {
             throw new Error('something went wrong')
         }
