@@ -10,6 +10,7 @@ import {
     Category,
     AboutUs,
     Events,
+    MainPage,
 } from "./mainBlock";
 
 import {
@@ -34,6 +35,7 @@ export class App extends Component {
     render() {
         return <div>
             <Header companyName={'Смачно'} />
+            <Route path="/" exact component={MainPage} />
             <section className="main-block">
                 <Switch>
                     <Route path="/about" component={AboutUs} />

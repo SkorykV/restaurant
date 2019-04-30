@@ -1,14 +1,19 @@
 $gray-color: #7b7b7b;
 $light-gray-color: #DCDCDC;
 $dark-blue-color: #369;
+$light-blue-transparent: rgba(30, 161, 220, .8);
+
+$slider-animation-time: 600;
 
 @import "normalize";
 @import "pagination";
 @import "filters";
 @import "header";
+@import "slider";
 @import "mainBlock";
-@import "media";
 @import "reservation";
+@import "media";
+
 
 *{
   box-sizing: border-box;

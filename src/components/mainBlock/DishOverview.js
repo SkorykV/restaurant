@@ -14,7 +14,7 @@ export const DishOverview = ({categoryId, dish}) => {
                     <div className="additional-params">
                         <div className="dish-weight">
                             <span>
-                                {dish.weight}
+                                {`${dish.weight} г`}
                             </span>
                         </div>
                         <div className="dish-price">

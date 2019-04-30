@@ -52,14 +52,14 @@ export class Dish extends Component {
                     )
                 }
                 <div className="dish-weight">
-                                    <span>
-                                        {dish.weight}
-                                    </span>
+                    <span>
+                        {`${dish.weight} г`}
+                    </span>
                 </div>
                 <div className="dish-price">
-                                    <span>
-                                        {`${dish.price} грн`}
-                                    </span>
+                    <span>
+                        {`${dish.price} грн`}
+                    </span>
                 </div>
             </div>
         </div>
