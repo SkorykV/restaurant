@@ -32,4 +32,20 @@ export class LocalRequestsSender {
         }
         return response;
     }
+
+    static async getUserByUsernamePassword(username, password) {
+        const response = await LocalHandler.getUserByUsernamePassword(username, password);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
+    }
+
+    static async registerUser(username, password, name, surname) {
+        const response = await LocalHandler.registerUser(username, password, name, surname);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return true;
+    }
 }

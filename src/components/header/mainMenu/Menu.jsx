@@ -4,6 +4,7 @@ import { LocalRequestsSender } from "../../../requestsSenders";
 
 import { DefaultMenuItem } from "./DefaultMenuItem.jsx";
 import { DropDownMenuItem } from "./DropDownMenuItem.jsx";
+import {CustomMenuItem} from "./CustomMenuItem";
 
 export class Menu extends Component {
     constructor(props) {
@@ -42,16 +43,6 @@ export class Menu extends Component {
     render() {
         let menu = this.state.menuCategories;
 
-        if(this.state.isLoading) {
-            menu = [{
-                data: {
-                    link: '#',
-                    text: 'Завантажується',
-                },
-                key: 'loading',
-            }]
-        }
-
         return (
             <nav>
                 <input type="checkbox" className="burger-menu" id="burger-menu" />
@@ -61,10 +52,32 @@ export class Menu extends Component {
                     <span />
                 </label>
                 <ul className="main-menu">
-                    <DropDownMenuItem active={true} text={'Меню'} items={menu}/>
-                    <DefaultMenuItem active={false} link={'/events'} text={'Заходи'}/>
-                    <DefaultMenuItem active={false} link={'/reservation'} text={'Забронювати столик'}/>
-                    <DefaultMenuItem active={false} link={'/about'} text={'Про нас'}/>
+                    <DropDownMenuItem active={true} text={'Меню'}>
+                        {
+                            !!menu.length && menu.map(
+                                item => <DefaultMenuItem link={item.data.link} key={item.key} >{item.data.text}</DefaultMenuItem>
+                            )
+                        }
+                        {
+                            !menu.length && this.state.isLoading &&
+                            <CustomMenuItem >Завантажується</CustomMenuItem>
+                        }
+                    </DropDownMenuItem>
+                    <DefaultMenuItem link={'/events'} >Заходи</DefaultMenuItem>
+                    <DefaultMenuItem link={'/reservation'} >Забронювати столик</DefaultMenuItem>
+                    <DefaultMenuItem link={'/about'} >Про нас</DefaultMenuItem>
+                    {
+                       !this.props.user && <CustomMenuItem active={this.props.loginModalShow} onClick={this.props.onLoginModalOpen}>Увійти</CustomMenuItem>
+                    }
+                    {
+                        this.props.user &&
+                        <DropDownMenuItem active={true} text={this.props.user.username}>
+                            <CustomMenuItem onClick={this.props.onLogout}>Вийти</CustomMenuItem>
+                        </DropDownMenuItem>
+                    }
+                    {
+                        !this.props.user && <CustomMenuItem active={this.props.loginModalShow} onClick={this.props.onRegistrationModalOpen}>Реєстрація</CustomMenuItem>
+                    }
                 </ul>
             </nav>
         )

@@ -159,7 +159,7 @@ nav {
                 padding: 0 20px;
                 border-right: 1px solid $gray-color;
             }
-            &:last-child > a {
+            &:last-child > a, &:last-child > span  {
                 border-right: none;
             }
         }
@@ -171,7 +171,7 @@ nav {
 
         position: absolute;
         top: 50px;
-        right: 1px;
+        right: 0;
 
         background: black;
 
@@ -213,7 +213,9 @@ nav {
                 margin: 5px auto 0 auto;
                 border-top: 1px solid white;
                 opacity: 1;
-                -webkit-transition: transform 2s, opacity 1s;
+                -webkit-transition: transform 1s, opacity 0.5s;
+                -moz-transition: transform 1s, opacity 0.5s;
+                -o-transition: transform 1s, opacity 0.5s;
                 transition: transform 1s, opacity 0.5s;
             }
         }

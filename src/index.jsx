@@ -6,8 +6,11 @@ import './styles/main.scss';
 
 import { InnerDatabase } from "./databases/InnerDatabase";
 import { App } from './components'
+import {dbC} from "./constants";
 
-InnerDatabase.initialize();
+if(!localStorage.getItem(dbC.innerDb.key)) {
+    InnerDatabase.initialize();
+}
 
 ReactDOM.render(
     <BrowserRouter>

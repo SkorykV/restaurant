@@ -18,6 +18,13 @@ export class InnerDatabase extends Database{
         return JSON.parse(localStorage.getItem(dbC.innerDb.key));
     }
 
+    static setDatabase(data) {
+        localStorage.setItem(
+            dbC.innerDb.key,
+            JSON.stringify(data),
+        )
+    }
+
     // TODO: delete this method
     static timer(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -182,6 +189,32 @@ export class InnerDatabase extends Database{
             return new RestaurantStructure(restaurant.type, restaurant.size, restaurant.tables);
         }
         return null
+    }
+
+    async getUserByUsername(username) {
+        await InnerDatabase.timer(1000);
+        const user = InnerDatabase.getDatabase().users.find(
+            user => user.username === username
+        );
+        if(user) {
+            return user;
+        }
+        else {
+            return null;
+        }
+    }
+
+    async addUser(username, password, name, surname) {
+        await InnerDatabase.timer(1000);
+        const user = {
+            username,
+            password,
+            name,
+            surname,
+        };
+        const database = InnerDatabase.getDatabase();
+        database.users.push(user);
+        InnerDatabase.setDatabase(database);
     }
 
 }

@@ -17,4 +17,12 @@ export class Database {
     async getRestaurantStructure(restaurantId) {
         throw new Error("get restaurant structure by params is not implemented")
     }
+
+    //users
+    async getUserByUsername(username) {
+        throw new Error("get user by username is not implemented")
+    }
+    async addUser(username, password, name, surname) {
+        throw new Error("add user is not implemented")
+    }
 }

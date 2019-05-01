@@ -1,5 +1,5 @@
 import { DatabaseImplementation } from "../databases";
-import {DishService, RestaurantService, CategoryService} from "../services";
+import {DishService, RestaurantService, CategoryService, UserService} from "../services";
 
 export class LocalHandler {
     static async getDish(restaurantId, categoryId, dishId) {
@@ -25,5 +25,15 @@ export class LocalHandler {
     static async getRestaurantStructure(restaurantId) {
         const service = new RestaurantService(DatabaseImplementation);
         return await service.getRestaurantStructure(restaurantId);
+    }
+
+    static async getUserByUsernamePassword(username, password) {
+        const service = new UserService(DatabaseImplementation);
+        return await service.getUserByUsernamePassword(username, password);
+    }
+
+    static async registerUser(username, password, name, surname) {
+        const service = new UserService(DatabaseImplementation);
+        return await service.addUser(username, password, name, surname);
     }
 }

@@ -180,7 +180,23 @@ export const dbC = {
                         },
                     ]
                 }
-            ]
+            ],
+            users: [
+                {
+                    id: '0',
+                    username: "magnus",
+                    password: "magnus1234",
+                    name: "Владимир",
+                    surname: "Скорик",
+                },
+                {
+                    id: '1',
+                    username: "test",
+                    password: "test1234",
+                    name: "Владимир",
+                    surname: "Скорик",
+                },
+            ],
         }
     },
 };

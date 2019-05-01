@@ -13,7 +13,6 @@ class HeaderComponent extends Component {
 
     constructor(props) {
         super(props);
-
         this.handleSearchFieldSubmit = this.handleSearchFieldSubmit.bind(this);
     }
 
@@ -57,7 +56,12 @@ class HeaderComponent extends Component {
                     onSubmit={this.handleSearchFieldSubmit}
                 />
             </div>
-            <Menu />
+            <Menu
+                onLoginModalOpen={this.props.onLoginModalOpen}
+                onLogout={this.props.onLogout}
+                onRegistrationModalOpen={this.props.onRegistrationModalOpen}
+                user={this.props.user}
+            />
         </header>
     }
 }

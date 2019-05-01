@@ -20,33 +20,44 @@ export class Slider extends Component {
     }
 
     componentDidMount() {
-        this.startAnimation();
+        this.startNextSlideWaitingAnimation();
     }
 
     componentWillUnmount() {
-        this.stopAnimation();
+        this.stopNextSlideWaitingAnimation();
+        this.stopSlideChangeAnimation();
     }
 
     componentDidUpdate(prevProps, prevState) {
         if(!prevState.animating && this.state.animating) {
-            this.stopAnimation();
-            setTimeout(() => {
-                this.setState({animating: false});
-            }, sliderC.animationTime)
+            this.stopNextSlideWaitingAnimation();
+            this.startSlideChangeAnimation();
         }
         if(prevState.animating && !this.state.animating) {
-            this.startAnimation();
+            this.startNextSlideWaitingAnimation();
         }
     }
 
-    startAnimation() {
-        this.animationTimer = setTimeout(() => {
+    startNextSlideWaitingAnimation() {
+        this.nextSlideTimer = setTimeout(() => {
             this.nextSlide();
         }, sliderC.pause)
     }
 
-    stopAnimation() {
-        clearTimeout(this.animationTimer);
+    stopNextSlideWaitingAnimation() {
+        clearTimeout(this.nextSlideTimer);
+        this.nextSlideTimer = undefined;
+    }
+
+    startSlideChangeAnimation() {
+        this.slideChangeTimer = setTimeout(() => {
+            this.setState({animating: false});
+        }, sliderC.animationTime)
+    }
+
+    stopSlideChangeAnimation() {
+        clearTimeout(this.slideChangeTimer);
+        this.slideChangeTimer = undefined;
     }
 
     nextSlide() {
