@@ -109,7 +109,12 @@ class MyApp extends Component {
             <section className="main-block">
                 <Switch>
                     <Route path="/about" component={AboutUs} />
-                    <Route path="/reservation" component={Reservation} />
+                    <Route path="/reservation" render={
+                        (routeProps) => (
+                            <Reservation {...routeProps} user={this.state.user} onLoginModalOpen={this.handleLoginModalOpen} />
+                        )
+                    }
+                    />
                     <Route path="/events" component={Events} />
                     <Route path="/search" component={SearchResults} />
                     <Route exact path="/category/:categoryId" component={Category} />

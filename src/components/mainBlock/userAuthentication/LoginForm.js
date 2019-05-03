@@ -80,7 +80,7 @@ export class LoginForm extends Component {
                 onClose={this.state.isLoading? undefined : this.props.onClose}
                 onSubmit={this.state.isLoading? undefined : this.handleSubmit}
             >
-                <label>
+                <label className="default-form-label">
                     <span>
                         Логін:
                     </span>
@@ -90,7 +90,7 @@ export class LoginForm extends Component {
                             <div className="input-error">{this.state.errors.username}</div>
                     }
                 </label>
-                <label>
+                <label className="default-form-label">
                     <span>
                         Пароль:
                     </span>

@@ -26,8 +26,8 @@ export const ModalForm = ({title='Modal Form', show=false, onClose=f=>f, onSubmi
                         {children}
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn-cancel" onClick={handleCloseBtnClick}>Закрити</button>
-                        <button type="submit" className="btn-submit">Підтвердити</button>
+                        <button type="button" className="btn btn-cancel" onClick={handleCloseBtnClick}>Закрити</button>
+                        <button type="submit" className="btn btn-submit">Підтвердити</button>
                     </div>
                 </div>
             </form>

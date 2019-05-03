@@ -41,11 +41,36 @@ export class LocalRequestsSender {
         return response.data;
     }
 
-    static async registerUser(username, password, name, surname) {
-        const response = await LocalHandler.registerUser(username, password, name, surname);
+    static async registerUser(username, password, name, surname, telephone) {
+        const response = await LocalHandler.registerUser(username, password, name, surname, telephone);
         if(!response.status) {
             throw new Error(response.error);
         }
         return true;
     }
+
+    static async getReservedTables(restaurantId, date, startTime, endTime) {
+        const response = await LocalHandler.getReservedTables(restaurantId, date, startTime, endTime);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
+    }
+
+    static async addReservation(restaurantId, tableId, userId, date, startTime, endTime) {
+        const response = await LocalHandler.addReservation(restaurantId, tableId, userId, date, startTime, endTime);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
+    }
+
+    static async deleteReservation(restaurantId, tableId, userId, reservationId) {
+        const response = await LocalHandler.deleteReservation(restaurantId, tableId, userId, reservationId);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
+    }
+
 }

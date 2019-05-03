@@ -22,7 +22,24 @@ export class Database {
     async getUserByUsername(username) {
         throw new Error("get user by username is not implemented")
     }
-    async addUser(username, password, name, surname) {
+    async addUser(username, password, name, surname, telephone) {
         throw new Error("add user is not implemented")
+    }
+
+    //reservations
+    async getReservedTables(restaurantId, date, startTime, endTime) {
+        throw new Error("get reservations is not implemented")
+    }
+
+    async getReservationsForTable(restaurantId, tableId, date, startTime, endTime) {
+        throw new Error("get reservations for table is not implemented")
+    }
+
+    async addReservation(restaurantId, tableId, userId, date, startTime, endTime) {
+        throw new Error("add reservation is not implemented")
+    }
+
+    async deleteReservation(restaurantId, tableId, userId, reservationId) {
+        throw new Error("delete reservation is not implemented")
     }
 }

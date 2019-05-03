@@ -1,3 +1,5 @@
+import v4 from 'uuid/v4';
+
 import { dbC } from "../constants";
 import {Category, Dish} from "../core/menu";
 
@@ -7,6 +9,22 @@ import {RestaurantStructure} from "../core/RestaurantStructure";
 
 
 export class InnerDatabase extends Database{
+    static timeSubstraction(time1, time2) {
+        return (time1.h * 60 + time1.m) - (time2.h * 60 + time2.m);
+    }
+
+    static timeEqual(time1, time2) {
+        return time1.h === time2.h && time1.m === time2.m
+    }
+
+    static timeIntIntersect(int1, int2) {
+        const minus = InnerDatabase.timeSubstraction;
+        if(minus(int1.startTime, int2.startTime) <= 0 && minus(int1.endTime, int2.startTime) <= 0) {
+            return false;
+        }
+        return !(minus(int1.startTime, int2.endTime) >= 0 && minus(int1.endTime, int2.endTime) >= 0)
+    }
+
     static initialize() {
         localStorage.setItem(
             dbC.innerDb.key,
@@ -83,7 +101,7 @@ export class InnerDatabase extends Database{
     }
 
     async getDishesByParams(restaurantId, query, filters, getFilters, page, onPage) {
-        await InnerDatabase.timer(1000);
+        //await InnerDatabase.timer(1000);
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
             let results =  restaurant.menuCategories.flatMap(
@@ -192,7 +210,7 @@ export class InnerDatabase extends Database{
     }
 
     async getUserByUsername(username) {
-        await InnerDatabase.timer(1000);
+        //await InnerDatabase.timer(1000);
         const user = InnerDatabase.getDatabase().users.find(
             user => user.username === username
         );
@@ -204,17 +222,105 @@ export class InnerDatabase extends Database{
         }
     }
 
-    async addUser(username, password, name, surname) {
-        await InnerDatabase.timer(1000);
+    async addUser(username, password, name, surname, telephone) {
+        //await InnerDatabase.timer(1000);
         const user = {
+            id: v4(),
             username,
             password,
             name,
             surname,
+            telephone,
         };
         const database = InnerDatabase.getDatabase();
         database.users.push(user);
         InnerDatabase.setDatabase(database);
+    }
+
+    async getReservedTables(restaurantId, date, startTime, endTime) {
+        //await InnerDatabase.timer(3000);
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            return restaurant.tables.flatMap(
+                table => {
+                    const reservation = table.reservations.find(
+                        r => {
+                            const int1 = {startTime, endTime};
+                            const int2 = {startTime: r.startTime, endTime: r.endTime};
+                            return r.date === date && InnerDatabase.timeIntIntersect(int1, int2)
+                        }
+                    );
+                    if(!reservation) {
+                        return []
+                    }
+                    else {
+                        return [{
+                            tableId: table.id,
+                            ...reservation,
+                            full: InnerDatabase.timeEqual(reservation.startTime, startTime) && InnerDatabase.timeEqual(reservation.endTime, endTime)}]
+                    }
+                }
+            );
+        }
+        return null
+    }
+
+    async getReservationsForTable(restaurantId, tableId, date, startTime, endTime) {
+        //await InnerDatabase.timer(1000);
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            const table = restaurant.tables.find(table => table.id === tableId);
+            if(table) {
+                const reservation = table.reservations.find(
+                    r => {
+                        const int1 = {startTime, endTime};
+                        const int2 = {startTime: r.startTime, endTime: r.endTime};
+                        return r.date === date && InnerDatabase.timeIntIntersect(int1, int2)
+                    }
+                );
+                return reservation || null;
+            }
+        }
+        return null
+    }
+
+    async addReservation(restaurantId, tableId, userId, date, startTime, endTime) {
+        //await InnerDatabase.timer(1000);
+        const database = InnerDatabase.getDatabase();
+        const restaurant = database.restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            const table = restaurant.tables.find(table => table.id === tableId);
+            if(table) {
+                const reservation = {
+                    id: v4(),
+                    date,
+                    startTime,
+                    endTime,
+                    userId,
+                };
+                table.reservations.push(reservation);
+                InnerDatabase.setDatabase(database);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    async deleteReservation(restaurantId, tableId, userId, reservationId) {
+        //await InnerDatabase.timer(1000);
+        const database = InnerDatabase.getDatabase();
+        const restaurant = database.restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            const table = restaurant.tables.find(table => table.id === tableId);
+            if(table) {
+                table.reservations = table.reservations.filter(
+                    r => r.id !== reservationId || r.userId !== userId
+                );
+                InnerDatabase.setDatabase(database);
+                return true;
+            }
+        }
+        return false;
     }
 
 }

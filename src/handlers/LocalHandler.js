@@ -1,5 +1,5 @@
 import { DatabaseImplementation } from "../databases";
-import {DishService, RestaurantService, CategoryService, UserService} from "../services";
+import {DishService, RestaurantService, CategoryService, UserService, ReservationService} from "../services";
 
 export class LocalHandler {
     static async getDish(restaurantId, categoryId, dishId) {
@@ -32,8 +32,23 @@ export class LocalHandler {
         return await service.getUserByUsernamePassword(username, password);
     }
 
-    static async registerUser(username, password, name, surname) {
+    static async registerUser(username, password, name, surname, telephone) {
         const service = new UserService(DatabaseImplementation);
-        return await service.addUser(username, password, name, surname);
+        return await service.addUser(username, password, name, surname, telephone);
+    }
+
+    static async getReservedTables(restaurantId, date, startTime, endTime) {
+        const service = new ReservationService(DatabaseImplementation);
+        return await service.getReservedTables(restaurantId, date, startTime, endTime);
+    }
+
+    static async addReservation(restaurantId, tableId, userId, date, startTime, endTime) {
+        const service = new ReservationService(DatabaseImplementation);
+        return await service.addReservation(restaurantId, tableId, userId, date, startTime, endTime);
+    }
+
+    static async deleteReservation(restaurantId, tableId, userId, reservationId) {
+        const service = new ReservationService(DatabaseImplementation);
+        return await service.deleteReservation(restaurantId, tableId, userId, reservationId);
     }
 }

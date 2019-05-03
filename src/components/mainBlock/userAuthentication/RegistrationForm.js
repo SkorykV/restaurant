@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {validateLogin, validatePassword, validateTextField} from "../../../lib";
+import {validateLogin, validatePassword, validateTelephoneField, validateTextField} from "../../../lib";
 
 import { ModalForm } from "../../modalForm";
 import {LocalRequestsSender} from "../../../requestsSenders";
@@ -21,6 +21,10 @@ export class RegistrationForm extends Component {
         }
     }
 
+    static checkTelephoneInput(value) {
+        return /^(0((\d{2}-\d{0,7})|\d{0,2}))?$/.test(value);
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -30,6 +34,7 @@ export class RegistrationForm extends Component {
             password: "",
             name: "",
             surname: "",
+            telephone: "",
             errors: null,
         };
         this.onChange = this.onChange.bind(this);
@@ -41,7 +46,7 @@ export class RegistrationForm extends Component {
             this.setState({errors: null, success: false})
         }
         else if(!prevState.isLoading && this.state.isLoading) {
-            LocalRequestsSender.registerUser(this.state.username, this.state.password, this.state.name, this.state.surname).then(
+            LocalRequestsSender.registerUser(this.state.username, this.state.password, this.state.name, this.state.surname, this.state.telephone).then(
                 () => {
                     this.setState({isLoading: false, success: true});
                     this.props.onRegistration();
@@ -52,6 +57,10 @@ export class RegistrationForm extends Component {
     }
 
     onChange(event) {
+        if(event.target.type === "tel" && !RegistrationForm.checkTelephoneInput(event.target.value)) {
+            event.preventDefault();
+            return;
+        }
         this.setState({
             [event.target.name]: event.target.value,
         })
@@ -67,8 +76,10 @@ export class RegistrationForm extends Component {
 
         errors.surname = RegistrationForm.getFieldError(this.state.surname, validateTextField);
 
-        if(!errors.username && !errors.password && !errors.name && !errors.surname) {
-            this.setState({isLoading: true, errors: null});
+        errors.telephone = RegistrationForm.getFieldError(this.state.telephone, validateTelephoneField);
+
+        if(!errors.username && !errors.password && !errors.name && !errors.surname && !errors.telephone) {
+            this.setState({isLoading: true, errors: null, success: false});
         }
         else {
             this.setState({errors, success: false})
@@ -83,7 +94,7 @@ export class RegistrationForm extends Component {
                 onClose={this.state.isLoading? undefined : this.props.onClose}
                 onSubmit={this.state.isLoading? undefined : this.handleSubmit}
             >
-                <label>
+                <label className="default-form-label">
                     <span>
                         Логін:
                     </span>
@@ -93,7 +104,7 @@ export class RegistrationForm extends Component {
                             <div className="input-error">{this.state.errors.username}</div>
                     }
                 </label>
-                <label>
+                <label className="default-form-label">
                     <span>
                         Пароль:
                     </span>
@@ -103,7 +114,7 @@ export class RegistrationForm extends Component {
                         <div className="input-error">{this.state.errors.password}</div>
                     }
                 </label>
-                <label>
+                <label className="default-form-label">
                     <span>
                         Ваше ім'я:
                     </span>
@@ -113,7 +124,7 @@ export class RegistrationForm extends Component {
                         <div className="input-error">{this.state.errors.name}</div>
                     }
                 </label>
-                <label>
+                <label className="default-form-label">
                     <span>
                         Ваше прізвище:
                     </span>
@@ -121,6 +132,16 @@ export class RegistrationForm extends Component {
                     {
                         this.state.errors && this.state.errors.surname &&
                         <div className="input-error">{this.state.errors.surname}</div>
+                    }
+                </label>
+                <label className="default-form-label">
+                    <span>
+                        Номер телефону<br/>(формат: 0XX-XXXXXXX):
+                    </span>
+                    <input type="tel" name="telephone" placeholder="0XX-XXXXXXX" value={this.state.telephone} disabled={this.state.isLoading} onChange={this.onChange}/>
+                    {
+                        this.state.errors && this.state.errors.telephone &&
+                        <div className="input-error">{this.state.errors.telephone}</div>
                     }
                 </label>
 

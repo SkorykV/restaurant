@@ -99,7 +99,22 @@ export const dbC = {
                                 height: 1.2,
                             },
                             position: { x: 0, y: 0.5},
-                            reservations: []
+                            reservations: [
+                                {
+                                    id: '0',
+                                    userId: '0',
+                                    date: (new Date(2019,4,10)).getTime(),
+                                    startTime: {h: 18, m: 30},
+                                    endTime: {h: 20, m: 0},
+                                },
+                                {
+                                    id: '1',
+                                    userId: '1',
+                                    date: (new Date(2019,4,10)).getTime(),
+                                    startTime: {h: 20, m: 0},
+                                    endTime: {h: 21, m: 30},
+                                }
+                            ]
                         },
                         {
                             id: "table2",
@@ -121,7 +136,13 @@ export const dbC = {
                                 height: 1.2,
                             },
                             position: { x: 0, y: 6.1},
-                            reservations: []
+                            reservations: [{
+                                id: '2',
+                                userId: '1',
+                                date: (new Date(2019,4,10)).getTime(),
+                                startTime: {h: 18, m: 15},
+                                endTime: {h: 20, m: 30},
+                            }]
                         },
                         {
                             id: "table4",
@@ -188,6 +209,7 @@ export const dbC = {
                     password: "magnus1234",
                     name: "Владимир",
                     surname: "Скорик",
+                    telephone: "096-0569073"
                 },
                 {
                     id: '1',
@@ -195,6 +217,7 @@ export const dbC = {
                     password: "test1234",
                     name: "Владимир",
                     surname: "Скорик",
+                    telephone: "096-0569073"
                 },
             ],
         }

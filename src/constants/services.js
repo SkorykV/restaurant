@@ -7,5 +7,15 @@ export const servicesC = {
     },
     tableTypes: {
         rectangle: "rectangle",
-    }
+    },
+    restaurantStartWorkingTime: {
+        h: 11,
+        m: 30,
+    },
+    restaurantEndWorkingTime: {
+        h: 23,
+        m: 30,
+    },
+    reservationPeriod: 30,
+    minReservationTime: 60,
 };

@@ -13,13 +13,13 @@ export class UserService extends BaseService{
         }
     }
 
-    async addUser(username, password, name, surname) {
+    async addUser(username, password, name, surname, telephone) {
         const user = await this.database.getUserByUsername(username);
         if(user) {
             return new ServiceResponse(false, null, 'Користувач з таким логіном вже існує');
         }
         else {
-            await this.database.addUser(username, password, name, surname);
+            await this.database.addUser(username, password, name, surname, telephone);
             return new ServiceResponse(true, null, null);
         }
     }
