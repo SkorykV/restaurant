@@ -67,7 +67,7 @@ export class Reservation extends Component {
                         isLoadingReservations: true,
                     });
                 },
-                error => this.setState({isSendingRequest: false,  error: error.message})
+                error => this.setState({isSendingRequest: false, isLoadingReservations: true, error: error.message})
             )
         }
     }

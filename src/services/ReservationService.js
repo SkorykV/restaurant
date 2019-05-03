@@ -33,7 +33,7 @@ export class ReservationService extends BaseService{
             }
             return new ServiceResponse(false, null, "Ресторану з таким ідентифікатором не існує");
         }
-        return new ServiceResponse(false, null, "Неможливо забронювати даний столик на цей цей");
+        return new ServiceResponse(false, null, "Неможливо забронювати даний столик на цей проміжок часу");
     }
 
     async deleteReservation(restaurantId, tableId, userId, reservationId) {
