@@ -42,4 +42,9 @@ export class Database {
     async deleteReservation(restaurantId, tableId, userId, reservationId) {
         throw new Error("delete reservation is not implemented")
     }
+
+    // events
+    async getRestaurantEvents(restaurantId) {
+        throw new Error("get restaurant events is not implemented")
+    }
 }

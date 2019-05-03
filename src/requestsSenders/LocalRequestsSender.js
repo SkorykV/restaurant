@@ -73,4 +73,12 @@ export class LocalRequestsSender {
         return response.data;
     }
 
+    static async getRestaurantEvents(restaurantId) {
+        const response = await LocalHandler.getRestaurantEvents(restaurantId);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
+    }
+
 }

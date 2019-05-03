@@ -1,8 +1,8 @@
 export const sliderC = {
     slides: [
         {
-            url: "slide_1.jpg",
-            title: 'slide 1',
+            url: "mamahohotala.png",
+            title: 'Мама хохотала шоу',
         },
         {
             url: "slide_2.jpg",

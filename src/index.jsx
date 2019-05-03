@@ -9,8 +9,10 @@ import { App } from './components'
 import {dbC} from "./constants";
 
 if(!localStorage.getItem(dbC.innerDb.key)) {
-    InnerDatabase.initialize();
+
 }
+
+InnerDatabase.initialize();
 
 ReactDOM.render(
     <BrowserRouter>

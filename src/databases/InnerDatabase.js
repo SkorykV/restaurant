@@ -323,4 +323,12 @@ export class InnerDatabase extends Database{
         return false;
     }
 
+    async getRestaurantEvents(restaurantId) {
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            return Array.concat(restaurant.events, restaurant.events, restaurant.events, restaurant.events)
+        }
+        return null;
+    }
+
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { withRouter } from "react-router";
+import {Redirect, withRouter} from "react-router";
 import {
     Route,
     Switch,
@@ -108,17 +108,19 @@ class MyApp extends Component {
             <Route path="/" exact component={MainPage} />
             <section className="main-block">
                 <Switch>
-                    <Route path="/about" component={AboutUs} />
-                    <Route path="/reservation" render={
+                    <Route exact path="/" render={()=>{}}/>
+                    <Route exact path="/about" component={AboutUs} />
+                    <Route exact path="/reservation" render={
                         (routeProps) => (
                             <Reservation {...routeProps} user={this.state.user} onLoginModalOpen={this.handleLoginModalOpen} />
                         )
                     }
                     />
-                    <Route path="/events" component={Events} />
-                    <Route path="/search" component={SearchResults} />
+                    <Route exact path="/events" component={Events} />
+                    <Route exact path="/search" component={SearchResults} />
                     <Route exact path="/category/:categoryId" component={Category} />
                     <Route exact path="/category/:categoryId/dish/:dishId" render={App.dishGenerator} />
+                    <Redirect to="/"/>
                 </Switch>
             </section>
         </div>
