@@ -15,8 +15,7 @@ export const dbC = {
                             title: 'МАМАХОХОТАЛА ШОУ',
                             sliderImage: 'mamahohotala.png',
                             logoImage: 'mamahohotala_logo.jpg',
-                            date: '21.05.2019',
-                            time: '19:00',
+                            timeStamp: (new Date('2019-05-21T19:00:00')).getTime(),
                             price: "299-899",
                             text: `Це буде на 100% нова програма. Актуальний гумор на теми сьогоднішнього дня. Ми будемо жартувати про те, що ви зараз самі обговорюєте з друзями, колегами та близькими.
 
@@ -31,8 +30,7 @@ export const dbC = {
                             title: 'ІМПРОВІЗАЦІЯ ДЛЯ ДОРОСЛИХ',
                             sliderImage: 'improv.jpg',
                             logoImage: 'improv_logo.jpg',
-                            date: '23.05.2019',
-                            time: '19:00',
+                            timeStamp: (new Date('2019-05-23T19:00:00')).getTime(),
                             price: "250-550",
                             text: `Непредсказуемо, ярко, умно, смешно, энергично, откровенно, удивительно!
 

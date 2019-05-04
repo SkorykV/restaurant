@@ -51,12 +51,34 @@
     padding: 2px 5%;
     .card-title {
       margin-top: 10px;
+      margin-bottom: auto;
       font-size: 0.875em;
       text-transform: uppercase;
       text-align: center;
     }
+
+    .card-body {
+
+      .card-sm-info {
+        margin: 10px 0 0;
+
+        &:first-child{
+          margin-top: 5px;
+        }
+
+        .card-sm-icon {
+          width: 16px;
+          height: 16px;
+        }
+
+        span {
+          font-size: 0.875em;
+          margin-left: 5px;
+        }
+      }
+    }
+
     .card-footer {
-      margin-top: auto;
       text-align: right;
       .card-details {
         font-size: 0.750em;

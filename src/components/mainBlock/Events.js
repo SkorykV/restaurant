@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCalendarAlt, faClock, faTicketAlt} from "@fortawesome/free-solid-svg-icons";
 
 import {LocalRequestsSender} from "../../requestsSenders";
 import {Card} from "../cards";
@@ -41,15 +43,42 @@ export class Events extends Component {
         return <div className="cards-container events-container">
             {
                 this.state.events.map(
-                    event => (
-                        <Card
-                            image={require(`../../images/events/${event.logoImage}`)}
-                            title={event.title}
-                            link='/'
-                            key={event.id}
-                        >
-                        </Card>
-                    )
+                    event => {
+                        const fullDate = new Date(event.timeStamp);
+
+                        var options = {
+                            month: 'long',
+                            day: 'numeric',
+                            weekday: 'long',
+                            timezone: 'UTC',
+                            hour: 'numeric',
+                            minute: 'numeric',
+                        };
+
+                        const parts = fullDate.toLocaleString('uk-UA', options).split(', ');
+
+                        return (
+                            <Card
+                                image={require(`../../images/events/${event.logoImage}`)}
+                                title={event.title}
+                                link='/'
+                                key={event.id}
+                            >
+                                <p className="card-sm-info">
+                                    <FontAwesomeIcon className="card-sm-icon" icon={faCalendarAlt} />
+                                    <span>{parts.slice(0,2).join(', ')}</span>
+                                </p>
+                                <p className="card-sm-info">
+                                    <FontAwesomeIcon className="card-sm-icon" icon={faClock} />
+                                    <span>{parts[2]}</span>
+                                </p>
+                                <p className="card-sm-info">
+                                    <FontAwesomeIcon className="card-sm-icon" icon={faTicketAlt} />
+                                    <span>{`${event.price} грн`}</span>
+                                </p>
+                            </Card>
+                        )
+                    }
                 )
             }
         </div>
