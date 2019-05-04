@@ -6,7 +6,7 @@ import {Slider} from "../slider/Slider";
 import {LocalRequestsSender} from "../../requestsSenders";
 
 
-export class MainPage extends Component {
+export class MainPageSlider extends Component {
     constructor(props) {
         super(props);
         this.state = {

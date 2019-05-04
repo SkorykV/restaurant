@@ -5,6 +5,7 @@ $light-blue-transparent: rgba(30, 161, 220, .8);
 $error-color: #a94442;
 
 $slider-animation-time: 600;
+$galary-animation-time: 500;
 
 @import "normalize";
 @import "pagination";
@@ -13,6 +14,7 @@ $slider-animation-time: 600;
 @import "modal";
 @import "header";
 @import "slider";
+@import "image-gallery.scss";
 @import "mainBlock";
 @import "reservation";
 @import "media";

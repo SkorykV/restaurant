@@ -44,7 +44,7 @@ export class MyComponent extends Component {
                     animating: false,
                     animationType: null,
                 }
-            }, () => {console.log('reseted')})
+            })
         }
         else {
             if(this.state.animating && !prevState.animating) {
@@ -87,7 +87,6 @@ export class MyComponent extends Component {
     nextSlide() {
             this.setState((prevState, props) => {
                 if(!prevState.animating) {
-                    console.log('nextSlide', prevState.active, prevState.next);
                     const prev = prevState.active;
                     const active = prevState.next;
                     const next = prevState.next < props.slides.length - 1 ? prevState.next + 1 : 0;

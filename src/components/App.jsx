@@ -13,7 +13,7 @@ import {
     AboutUs,
     Events,
     Event,
-    MainPage,
+    MainPageSlider, MainPageContent,
 } from "./mainBlock";
 
 import {
@@ -95,7 +95,7 @@ class MyApp extends Component {
     render() {
         return <div>
             <Header
-                companyName={'Смачно'}
+                companyName={'Saperavi'}
                 onLoginModalOpen={this.handleLoginModalOpen}
                 onLogout={this.handleLogout}
                 onRegistrationModalOpen={this.handleRegistrationModalOpen}
@@ -111,10 +111,10 @@ class MyApp extends Component {
                 onClose={this.handleRegistrationModalClose}
             />
 
-            <Route path="/" exact component={MainPage} />
+            <Route path="/" exact component={MainPageSlider} />
             <section className="main-block">
                 <Switch>
-                    <Route exact path="/" render={()=>{}}/>
+                    <Route exact path="/" component={MainPageContent}/>
                     <Route exact path="/about" component={AboutUs} />
                     <Route exact path="/reservation" render={
                         (routeProps) => (
