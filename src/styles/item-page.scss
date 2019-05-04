@@ -1,0 +1,45 @@
+.item-page {
+  display: flex;
+  color: $gray-color;
+
+  .img-col {
+    img {
+      display:block;
+      margin: auto;
+      width: 100%;
+    }
+  }
+
+  .img-col-lg {
+    flex: 0 0 50%;
+    img {
+      max-width: 400px;
+    }
+  }
+
+  .img-col-md {
+    flex: 0 0 30%;
+    img {
+      max-width: 200px;
+    }
+  }
+
+  .content-col {
+    text-align: left;
+
+    .title {
+      margin: 0;
+      font-size: 1.750em;
+      font-weight: normal;
+      text-transform: uppercase;
+    }
+  }
+
+  .content-col-padding {
+    padding-left: 3%;
+  }
+
+  .content-col-lg {
+    flex: 1 0 50%;
+  }
+}

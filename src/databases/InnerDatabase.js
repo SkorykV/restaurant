@@ -323,10 +323,35 @@ export class InnerDatabase extends Database{
         return false;
     }
 
-    async getRestaurantEvents(restaurantId) {
+    async getRestaurantEvents(restaurantId, timestamp) {
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
-            return Array.concat(restaurant.events, restaurant.events, restaurant.events, restaurant.events)
+            return restaurant.events.filter(event => event.timestamp >= timestamp).sort((e1, e2) => e1.timestamp - e2.timestamp)
+        }
+        return null;
+    }
+
+    async getRestaurantEvent(restaurantId, eventId, timestamp) {
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            const event = restaurant.events.find(event => event.id === eventId);
+            if(event && event.timestamp >= timestamp) {
+                return event;
+            }
+        }
+        return null;
+    }
+
+    async getRestaurantEventsSlides(restaurantId, timestamp) {
+        const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
+        if(restaurant) {
+            return restaurant.events.filter(event => event.timestamp >= timestamp).sort((e1, e2) => e1.timestamp - e2.timestamp).map(
+                event => ({
+                    eventId: event.id,
+                    url: event.sliderImage,
+                    title: event.title,
+                })
+            );
         }
         return null;
     }

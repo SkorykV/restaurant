@@ -63,4 +63,14 @@ export class LocalHandler {
         const service = new EventsService(DatabaseImplementation);
         return await service.getRestaurantEvents(restaurantId);
     }
+
+    static async getRestaurantEvent(restaurantId, eventId) {
+        const service = new EventsService(DatabaseImplementation);
+        return await service.getRestaurantEvent(restaurantId, eventId);
+    }
+
+    static async getRestaurantEventsSlides(restaurantId) {
+        const service = new EventsService(DatabaseImplementation);
+        return await service.getRestaurantEventsSlides(restaurantId);
+    }
 }

@@ -12,6 +12,7 @@ import {
     Category,
     AboutUs,
     Events,
+    Event,
     MainPage,
 } from "./mainBlock";
 
@@ -42,8 +43,13 @@ class MyApp extends Component {
         this.handleRegistrationModalOpen = this.handleRegistrationModalOpen.bind(this);
     }
 
-    static dishGenerator(props) {
-        return <Dish {...props} key={props.match.params.dishId}/>
+    componentWillReceiveProps(nextProps) {
+
+        const {location, history: {action}} = nextProps;
+        if (location !== this.props.location && action === 'PUSH') {
+            // new navigation - scroll to top
+            window.scrollTo(0, 0);
+        }
     }
 
     handleLoginModalOpen() {
@@ -117,9 +123,10 @@ class MyApp extends Component {
                     }
                     />
                     <Route exact path="/events" component={Events} />
+                    <Route exact path="/events/:eventId" component={Event} />
                     <Route exact path="/search" component={SearchResults} />
                     <Route exact path="/category/:categoryId" component={Category} />
-                    <Route exact path="/category/:categoryId/dish/:dishId" render={App.dishGenerator} />
+                    <Route exact path="/category/:categoryId/dish/:dishId" component={Dish} />
                     <Redirect to="/"/>
                 </Switch>
             </section>

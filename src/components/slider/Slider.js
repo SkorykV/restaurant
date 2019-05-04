@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types";
-
-import { sliderC } from "../../constants";
+import {withRouter} from "react-router";
 
 import {Slide} from "./Slide";
+import {sliderC} from "../../constants/slider";
 
 
-export class Slider extends Component {
+
+export class MyComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            prev: props.slides.length-1,
+            prev: props.slides.length > 0 ? props.slides.length-1 : 0,
             active: 0,
             next: props.slides.length > 1 ? 1 : 0,
             animating: false,
+            animationType: null,
         };
         this.nextSlide = this.nextSlide.bind(this);
         this.prevSlide = this.prevSlide.bind(this);
@@ -29,19 +31,36 @@ export class Slider extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(!prevState.animating && this.state.animating) {
+        if(prevProps !== this.props) {
+            //reset slider
+            this.stopSlideChangeAnimation();
             this.stopNextSlideWaitingAnimation();
-            this.startSlideChangeAnimation();
+
+            this.setState((prevState, props) => {
+                return {
+                    prev: props.slides.length > 0 ? props.slides.length-1 : 0,
+                    active: 0,
+                    next: props.slides.length > 1 ? 1 : 0,
+                    animating: false,
+                    animationType: null,
+                }
+            }, () => {console.log('reseted')})
         }
-        if(prevState.animating && !this.state.animating) {
-            this.startNextSlideWaitingAnimation();
+        else {
+            if(this.state.animating && !prevState.animating) {
+                this.stopNextSlideWaitingAnimation();
+                this.startSlideChangeAnimation();
+            }
+            else if(!this.state.animating && this.nextSlideTimer === undefined) {
+                this.startNextSlideWaitingAnimation();
+            }
         }
     }
 
     startNextSlideWaitingAnimation() {
         this.nextSlideTimer = setTimeout(() => {
             this.nextSlide();
-        }, sliderC.pause)
+        }, this.props.pause)
     }
 
     stopNextSlideWaitingAnimation() {
@@ -50,9 +69,14 @@ export class Slider extends Component {
     }
 
     startSlideChangeAnimation() {
-        this.slideChangeTimer = setTimeout(() => {
-            this.setState({animating: false});
-        }, sliderC.animationTime)
+        if(this.props.slides.length > 2) {
+            this.slideChangeTimer = setTimeout(() => {
+                this.setState({animating: false, animationType: null});
+            }, sliderC.animationTime)
+        }
+        else {
+            this.setState({animating: false, animationType: null});
+        }
     }
 
     stopSlideChangeAnimation() {
@@ -61,19 +85,24 @@ export class Slider extends Component {
     }
 
     nextSlide() {
-        if(!this.state.animating) {
             this.setState((prevState, props) => {
-                const prev = prevState.active;
-                const active = prevState.next;
-                const next = prevState.next < props.slides.length - 1 ? prevState.next + 1 : 0;
-                return {
-                    prev,
-                    active,
-                    next,
-                    animating: true,
+                if(!prevState.animating) {
+                    console.log('nextSlide', prevState.active, prevState.next);
+                    const prev = prevState.active;
+                    const active = prevState.next;
+                    const next = prevState.next < props.slides.length - 1 ? prevState.next + 1 : 0;
+                    return {
+                        prev,
+                        active,
+                        next,
+                        animating: true,
+                        animationType: 'next',
+                    }
+                }
+                else {
+                    return undefined;
                 }
             });
-        }
     }
 
     prevSlide() {
@@ -87,6 +116,7 @@ export class Slider extends Component {
                     active,
                     next,
                     animating: true,
+                    animationType: 'prev',
                 }
             })
         }
@@ -98,16 +128,37 @@ export class Slider extends Component {
                 <div className="slider-content">
                     {
                         this.props.slides.map(
-                            (slide, index) => (
-                                <Slide
-                                    key={slide.url}
-                                    url={require(`../../images/slider/${slide.url}`)}
-                                    title={slide.title}
-                                    active={index === this.state.active}
-                                    next={index === this.state.next}
-                                    prev={index === this.state.prev}
-                                />
-                            )
+                            (slide, index) => {
+                                let prev = index === this.state.prev;
+                                const active = index === this.state.active;
+                                let next = index === this.state.next;
+                                if(next && prev) {
+                                    next = prev = false;
+                                }
+                                let visible = false;
+                                if(active) {
+                                    visible = true;
+                                }
+                                else if(this.state.animationType === 'prev' && next) {
+                                    visible = true;
+                                }
+                                else if(this.state.animationType === 'next' && prev) {
+                                    visible = true;
+                                }
+
+                                return (
+                                    <Slide
+                                        key={slide.url}
+                                        url={require(`../../images/slider/${slide.url}`)}
+                                        title={slide.title}
+                                        active={active}
+                                        next={next}
+                                        prev={prev}
+                                        visible={visible}
+                                        onClick={() => this.props.history.push(`/events/${slide.eventId}`)}
+                                    />
+                                )
+                            }
                         )
                     }
                 </div>
@@ -118,13 +169,18 @@ export class Slider extends Component {
     }
 }
 
-Slider.propTypes = {
+MyComponent.propTypes = {
     slides: PropTypes.arrayOf(PropTypes.shape({
+        eventId: PropTypes.string.isRequired,
         url: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
     })).isRequired,
+    pause: PropTypes.number,
 };
 
-Slider.defaultProps = {
-    slides: []
+MyComponent.defaultProps = {
+    slides: [],
+    pause: 5000,
 };
+
+export const Slider = withRouter(MyComponent);

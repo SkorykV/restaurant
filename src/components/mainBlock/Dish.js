@@ -13,7 +13,8 @@ export class Dish extends Component {
         }
     }
 
-    componentDidMount() {
+
+    fetchData() {
         this.setState({isLoading: true});
         const { categoryId, dishId } = this.props.match.params;
         LocalRequestsSender.getDishRequest('myFirstRestaurant', categoryId, dishId).then(
@@ -24,8 +25,18 @@ export class Dish extends Component {
                     isLoading: false,
                 })
             },
-            error => { this.setState({isLoading: false, error })}
+            error => { this.setState({isLoading: false, error: error.message })}
         );
+    }
+
+    componentDidMount() {
+        this.fetchData();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props !== prevProps) {
+            this.fetchData();
+        }
     }
 
     render() {
@@ -33,20 +44,23 @@ export class Dish extends Component {
         if(this.state.isLoading) {
             return <h2>Почекайте, будь ласка, інформація про страву завантажується</h2>
         }
+        if(this.state.error) {
+            return <h2>{this.state.error}</h2>
+        }
         if(!this.state.dish){
-            return <h2>Вибачте, інформація про дану страву не знайдена.</h2>
+            return <div />
         }
 
-        return <div className="dish">
-            <div className="dish-img">
+        return <div className="item-page">
+            <div className="img-col img-col-lg">
                 <img src={require(`../../images/menu/dishes/${dish.image}`)} alt={dish.title} />
             </div>
-            <div className="dish-info">
-                <h2>{dish.title}</h2>
+            <div className="content-col content-col-lg content-col-padding">
+                <h2 className="title">{dish.title}</h2>
                 {
                     dish.description.split('\n').map(
                         (paragraph,i) =>
-                            <p className="dish-description" key={i}>
+                            <p className="item-description" key={i}>
                                 { paragraph }
                             </p>
                     )

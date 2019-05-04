@@ -4,6 +4,7 @@ import {faCalendarAlt, faClock, faTicketAlt} from "@fortawesome/free-solid-svg-i
 
 import {LocalRequestsSender} from "../../requestsSenders";
 import {Card} from "../cards";
+import {getLocalDateTime} from "../../lib";
 
 export class Events extends Component {
 
@@ -32,48 +33,39 @@ export class Events extends Component {
 
     render() {
         if(this.state.isLoading) {
-            return <h2>Почекайте, будь ласка, категорія меню завантажується</h2>
+            return <h2>Почекайте, будь ласка, список заходів завантажується</h2>
         }
         if(this.state.error){
             return <h2>{this.state.error}</h2>
         }
-        if(!this.state.events){
-            return <h2>Зараз нажаль не планується ніяких заходів в цьому ресторані</h2>
+        if(!this.state.events.length){
+            return <h2>Зараз на жаль не планується ніяких заходів в цьому ресторані</h2>
         }
         return <div className="cards-container events-container">
             {
                 this.state.events.map(
                     event => {
-                        const fullDate = new Date(event.timeStamp);
+                        const fullDate = new Date(event.timestamp);
 
-                        var options = {
-                            month: 'long',
-                            day: 'numeric',
-                            weekday: 'long',
-                            timezone: 'UTC',
-                            hour: 'numeric',
-                            minute: 'numeric',
-                        };
-
-                        const parts = fullDate.toLocaleString('uk-UA', options).split(', ');
+                        const {date, time} = getLocalDateTime(fullDate);
 
                         return (
                             <Card
                                 image={require(`../../images/events/${event.logoImage}`)}
                                 title={event.title}
-                                link='/'
+                                link={`/events/${event.id}`}
                                 key={event.id}
                             >
-                                <p className="card-sm-info">
-                                    <FontAwesomeIcon className="card-sm-icon" icon={faCalendarAlt} />
-                                    <span>{parts.slice(0,2).join(', ')}</span>
+                                <p className="event-info-sm">
+                                    <FontAwesomeIcon className="event-icon" icon={faCalendarAlt} />
+                                    <span>{date}</span>
                                 </p>
-                                <p className="card-sm-info">
-                                    <FontAwesomeIcon className="card-sm-icon" icon={faClock} />
-                                    <span>{parts[2]}</span>
+                                <p className="event-info-sm">
+                                    <FontAwesomeIcon className="event-icon" icon={faClock} />
+                                    <span>{time}</span>
                                 </p>
-                                <p className="card-sm-info">
-                                    <FontAwesomeIcon className="card-sm-icon" icon={faTicketAlt} />
+                                <p className="event-info-sm">
+                                    <FontAwesomeIcon className="event-icon" icon={faTicketAlt} />
                                     <span>{`${event.price} грн`}</span>
                                 </p>
                             </Card>

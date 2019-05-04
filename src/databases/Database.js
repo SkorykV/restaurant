@@ -44,7 +44,16 @@ export class Database {
     }
 
     // events
-    async getRestaurantEvents(restaurantId) {
+    async getRestaurantEvents(restaurantId, timestamp) {
         throw new Error("get restaurant events is not implemented")
+    }
+
+    async getRestaurantEvent(restaurantId, eventId, timestamp) {
+        throw new Error("get restaurant event by id is not implemented")
+    }
+
+    //slider api
+    async getRestaurantEventsSlides(restaurantId, timestamp) {
+        throw new Error("get restaurant events slides is not implemented")
     }
 }

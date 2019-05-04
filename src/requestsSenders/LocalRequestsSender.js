@@ -81,4 +81,20 @@ export class LocalRequestsSender {
         return response.data;
     }
 
+    static async getRestaurantEvent(restaurantId, eventId) {
+        const response = await LocalHandler.getRestaurantEvent(restaurantId, eventId);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
+    }
+
+    static async getRestaurantEventsSlides(restaurantId) {
+        const response = await LocalHandler.getRestaurantEventsSlides(restaurantId);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
+    }
+
 }
