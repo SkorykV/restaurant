@@ -1,34 +1,44 @@
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     background: black;
-    height: 50px;
+    height: $header-height;
+    z-index: 4;
 
     .left-header {
         display: inline-block;
         height: inherit;
 
-        .logo {
-            width: 50px;
+        >a {
+            display: inline-block;
+            cursor: pointer;
             height: inherit;
+            .logo {
+                width: $header-height;
+                height: inherit;
 
-            position: relative;
-            float: left;
-            img {
-                position: absolute;
-                top: 5px;
-                left: 5px;
-                height: 40px;
+                position: relative;
+                float: left;
+                img {
+                    position: absolute;
+                    top: 5px;
+                    left: 5px;
+                    height: 40px;
+                }
             }
-        }
 
-        .company-name {
-            float: left;
-            margin-left: 10px;
-            height: inherit;
-            h1 {
-                line-height: 50px;
-                color: white;
-                margin: 0;
+            .company-name {
+                float: left;
+                margin-left: 10px;
+                height: inherit;
+                h1 {
+                    line-height: $header-height;
+                    color: white;
+                    margin: 0;
+                }
             }
         }
     }
@@ -36,7 +46,8 @@ header {
 
 .search {
     display: inline-block;
-    height: 50px;
+    float: right;
+    height: $header-height;
     margin-left: 15px;
     position: relative;
 
@@ -46,16 +57,16 @@ header {
         color: white;
         padding-left: $search-field-border;
         font-size: 30px;
-        line-height: 50px;
+        line-height: $header-height;
         cursor: pointer;
     }
 
     .search-field-container {
         position: absolute;
-        bottom: -50px;
+        bottom: -$header-height;
         width: 350px;
         height: 50px;
-        z-index: 1;
+        z-index: 4;
         background: black;
         &.collapsed {
             display: none;
@@ -152,7 +163,7 @@ nav {
     .main-menu {
         cursor: pointer;
         &>li {
-            height: 50px;
+            height: $header-height;
 
             >a, >span  {
                 margin: 10px 0;
@@ -167,10 +178,10 @@ nav {
 
     .sub-menu{
         display: none;
-        z-index: 1;
+        z-index: 4;
 
         position: absolute;
-        top: 50px;
+        top: $header-height;
         right: 0;
 
         background: black;

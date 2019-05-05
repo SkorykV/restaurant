@@ -8,6 +8,8 @@ $error-color: #a94442;
 $slider-animation-time: 600;
 $galary-animation-time: 500;
 
+$header-height: 50px;
+
 @import "normalize";
 @import "pagination";
 @import "filters";
@@ -27,6 +29,11 @@ $galary-animation-time: 500;
 
 body {
   color: $gray-color;
+  overflow-y: scroll;
+}
+
+main {
+  padding-top: $header-height;
 }
 
 a {

@@ -5,8 +5,12 @@
   min-width: 500px;
   margin: 0 auto;
   .selected-image-container {
+    display: none;
     padding: 5px;
     border: 1px solid $light-gray-color;
+    &.selected {
+      display: block;
+    }
     .selected-image{
       width: 100%;
       background-size: cover;

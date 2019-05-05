@@ -111,25 +111,27 @@ class MyApp extends Component {
                 onClose={this.handleRegistrationModalClose}
             />
 
-            <Route path="/" exact component={MainPageSlider} />
-            <section className="main-block">
-                <Switch>
-                    <Route exact path="/" component={MainPageContent}/>
-                    <Route exact path="/contacts" component={Contacts} />
-                    <Route exact path="/reservation" render={
-                        (routeProps) => (
-                            <Reservation {...routeProps} user={this.state.user} onLoginModalOpen={this.handleLoginModalOpen} />
-                        )
-                    }
-                    />
-                    <Route exact path="/events" component={Events} />
-                    <Route exact path="/events/:eventId" component={Event} />
-                    <Route exact path="/search" component={SearchResults} />
-                    <Route exact path="/category/:categoryId" component={Category} />
-                    <Route exact path="/category/:categoryId/dish/:dishId" component={Dish} />
-                    <Redirect to="/"/>
-                </Switch>
-            </section>
+            <main>
+                <Route path="/" exact component={MainPageSlider} />
+                <section className="main-block">
+                    <Switch>
+                        <Route exact path="/" component={MainPageContent}/>
+                        <Route exact path="/contacts" component={Contacts} />
+                        <Route exact path="/reservation" render={
+                            (routeProps) => (
+                                <Reservation {...routeProps} user={this.state.user} onLoginModalOpen={this.handleLoginModalOpen} />
+                            )
+                        }
+                        />
+                        <Route exact path="/events" component={Events} />
+                        <Route exact path="/events/:eventId" component={Event} />
+                        <Route exact path="/search" component={SearchResults} />
+                        <Route exact path="/category/:categoryId" component={Category} />
+                        <Route exact path="/category/:categoryId/dish/:dishId" component={Dish} />
+                        <Redirect to="/"/>
+                    </Switch>
+                </section>
+            </main>
         </div>
     }
 }

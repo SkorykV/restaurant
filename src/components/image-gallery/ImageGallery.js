@@ -60,10 +60,22 @@ export class ImageGallery extends Component {
 
         return (
             <div className="image-gallery">
-                <div className="selected-image-container">
-                    <div className="selected-image" style={{backgroundImage: `url(${this.props.images[selected].large})`}}>
-                    </div>
-                </div>
+                {
+                    this.props.images.map(
+                        (image, i) => {
+                            return (
+                                <div
+                                    className={"selected-image-container" + (i === selected ? " selected" : "")}
+                                    key={image.large}
+                                >
+                                    <div className="selected-image" style={{backgroundImage: `url(${image.large})`}}>
+                                    </div>
+                                </div>
+                            )
+                        }
+
+                    )
+                }
 
                 <div className="preview-bar">
                     <div className="items-container" style={{transform: `translateX(${translation}%)`}}>
