@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
 import PropTypes from "prop-types";
-import { withRouter } from "react-router";
 
 import {CheckboxWithCount, RangeFilter} from "../../filters";
-import {createSearchStrFromObj, simpleSearchParamsParse, validateFloat, validateInt} from "../../../lib";
+import {validateFloat, validateInt} from "../../../lib";
 
-class MyComponent extends Component {
+export class FiltersForm extends Component {
 
     static initCategoriesCheckboxList(categories) {
         const state = {};
@@ -25,7 +24,7 @@ class MyComponent extends Component {
         this.state = {
             price: null,
             weight: null,
-            categories: MyComponent.initCategoriesCheckboxList(this.props.categories)
+            categories: FiltersForm.initCategoriesCheckboxList(this.props.categories)
         };
 
         this.priceConverter = input => Math.floor(input * 100) / 100;
@@ -47,7 +46,7 @@ class MyComponent extends Component {
             }
             if(this.props.categories !== prevProps.categories) {
                 if(this.props.categories !== null){
-                    update.categories = MyComponent.initCategoriesCheckboxList(this.props.categories)
+                    update.categories = FiltersForm.initCategoriesCheckboxList(this.props.categories)
                 }
                 else {
                     update.categories = undefined
@@ -77,11 +76,6 @@ class MyComponent extends Component {
     handleSubmit(event) {
         if(!this.props.disabled) {
             const params = {};
-            const newLocation = Object.assign({}, this.props.location);
-
-            const prevParams = simpleSearchParamsParse(this.props.location.search);
-
-            params.query = prevParams.query ? prevParams.query : '';
 
             if(this.state.price) {
                 if(this.state.price.from !== this.props.price.from) {
@@ -108,9 +102,7 @@ class MyComponent extends Component {
                 }
             }
 
-            newLocation.search = createSearchStrFromObj(params);
-
-            this.props.history.push(newLocation);
+            this.props.onSubmit(params);
         }
 
         event.preventDefault();
@@ -153,28 +145,28 @@ class MyComponent extends Component {
                     valueConverter={this.weightConverter}
                 />
                 { checkboxes }
-                <button type="submit" disabled={this.props.disabled}>Примінити фільтри</button>
+                <button type="submit" className="btn btn-submit" disabled={this.props.disabled}>Примінити фільтри</button>
             </form>
         )
     }
 }
 
-MyComponent.propTypes = {
+FiltersForm.propTypes = {
     price: PropTypes.shape({
         from: PropTypes.number.isRequired,
         to: PropTypes.number.isRequired,
-    }),
+    }).isRequired,
     weight: PropTypes.shape({
         from: PropTypes.number.isRequired,
         to: PropTypes.number.isRequired,
-    }),
+    }).isRequired,
     categories: PropTypes.object,
     disabled: PropTypes.bool,
+    onSubmit: PropTypes.func,
 };
 
-MyComponent.defaultProps = {
+FiltersForm.defaultProps = {
     categories: null,
     disabled: false,
+    onSubmit: f=>f,
 };
-
-export const FiltersForm = withRouter(MyComponent);

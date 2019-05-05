@@ -47,13 +47,48 @@
   }
 }
 
-.search-filters {
-  float: left;
+.search-params{
+  float: right;
   width: 40%;
-  padding: 20px 50px;
-  border: 1px solid black;
-  .filters-title {
-    margin-top: 0;
+  .search-filters, .search-sort {
+    padding: 20px 50px;
+    border: 1px solid $light-gray-color;
     text-align: center;
+
+    &:nth-child(n+2) {
+      margin-top: 20px;
+    }
+
+    .filters-title {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .sort-filter {
+
+      margin: 0 auto;
+      padding: 0;
+      text-align: center;
+
+      ul {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        list-style-type: none;
+        text-align: left;
+      }
+
+      li {
+        cursor: pointer;
+        margin-top: 10px;
+        &.selected {
+          color: $dark-blue-color;
+          text-decoration: underline;
+        }
+      }
+
+    }
   }
 }
+
+

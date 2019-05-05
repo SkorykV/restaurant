@@ -4,9 +4,11 @@ import {LocalRequestsSender} from "../../../requestsSenders";
 
 import {FilterForm, FiltersForm} from "./FiltersForm";
 import {Pagination} from "../../pagination";
-import { simpleSearchParamsParse } from '../../../lib';
+import {createSearchStrFromObj, simpleSearchParamsParse} from '../../../lib';
 import { uiC } from "../../../constants";
 import {DishOverview} from "../DishOverview";
+import {SortComponent} from "./SortComponent";
+import {servicesC} from "../../../constants/services";
 
 export class SearchResults extends Component {
 
@@ -20,7 +22,11 @@ export class SearchResults extends Component {
             isLoadingContent: false,
             isLoadingFilters: false,
             error: null,
-        }
+        };
+
+        this.updateSearchParams = this.updateSearchParams.bind(this);
+        this.handleFiltersFormSubmit = this.handleFiltersFormSubmit.bind(this);
+        this.handleSortParamChange = this.handleSortParamChange.bind(this);
     }
 
     fetchData(params, getFilters=true) {
@@ -33,6 +39,7 @@ export class SearchResults extends Component {
             currentPage = Number.isFinite(n) ? n : currentPage;
         }
 
+        //get filters from search params
         const filters = {};
         let minPrice = -Infinity, maxPrice = Infinity;
         if('minPrice' in params) {
@@ -64,9 +71,19 @@ export class SearchResults extends Component {
             filters.categories = params.categories;
         }
 
+        //get sort param from search params
+        this.selectedSort = servicesC.defaultSortOption;
+        if(params.sort) {
+            const requestedSort = servicesC.sortOptions.findIndex(option => option.value === params.sort);
+            if(requestedSort !== -1) {
+                this.selectedSort = requestedSort;
+            }
+        }
+
         const requestParams = {
             query: params.query,
             filters,
+            sort: servicesC.sortOptions[this.selectedSort].value,
         };
 
         const responseParams = {
@@ -85,7 +102,7 @@ export class SearchResults extends Component {
                     ...content,
                 })
             },
-            error => { this.setState({isLoadingContent: false, isLoadingFilters: false, error })}
+            error => { this.setState({isLoadingContent: false, isLoadingFilters: false, error: error.message })}
         );
 
     }
@@ -104,9 +121,47 @@ export class SearchResults extends Component {
         }
     }
 
+    updateSearchParams({filters=null, sort=null} = {filters: null, sort: null}) {
+        let searchParams;
+
+        const newLocation = Object.assign({}, this.props.location);
+
+        const prevParams = simpleSearchParamsParse(this.props.location.search);
+
+        if(filters !== null) {
+            searchParams = {
+                query: prevParams.query ? prevParams.query : '',
+                ...filters,
+            }
+        }
+        else {
+            searchParams = {...prevParams};
+        }
+
+        if(sort !== null) {
+            searchParams.sort = sort;
+        }
+        else if(prevParams.sort) {
+            searchParams.sort = prevParams.sort;
+        }
+
+
+        newLocation.search = createSearchStrFromObj(searchParams);
+
+        this.props.history.push(newLocation);
+    }
+
+    handleFiltersFormSubmit(filtersParams) {
+        this.updateSearchParams({filters: filtersParams});
+    }
+
+    handleSortParamChange(sortValue) {
+        this.updateSearchParams({sort: sortValue})
+    }
+
     render() {
         if(this.state.error){
-            return <h2>Вибачте, щось пішло не так</h2>
+            return <h2>{this.state.error}</h2>
         }
 
         let content;
@@ -154,6 +209,7 @@ export class SearchResults extends Component {
                         weight={this.state.filters.weight}
                         categories={this.state.filters.categories}
                         disabled={this.state.isLoadingContent}
+                        onSubmit={this.handleFiltersFormSubmit}
                     />
                 </div>
             )
@@ -164,7 +220,20 @@ export class SearchResults extends Component {
                 <div className="search-results">
                     { content }
                 </div>
-                { filters }
+                <div className="search-params">
+                    { filters }
+                    {
+                        this.state.filters &&
+                        <div className="search-sort">
+                            <h3 className="filters-title">Сортування</h3>
+                            <SortComponent
+                                options={servicesC.sortOptions}
+                                selected={this.selectedSort}
+                                onChange={this.handleSortParamChange}
+                            />
+                        </div>
+                    }
+                </div>
             </div>
         )
     }

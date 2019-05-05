@@ -81,6 +81,11 @@
   border-radius: 10px;
 }
 
+.btn-submit {
+  display: inline-block;
+  background-color: $dark-blue-color;
+}
+
 .form-alert {
   width: 60%;
   margin: 10px auto 0;

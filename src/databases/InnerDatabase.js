@@ -100,7 +100,7 @@ export class InnerDatabase extends Database{
         return null;
     }
 
-    async getDishesByParams(restaurantId, query, filters, getFilters, page, onPage) {
+    async getDishesByParams(restaurantId, query, filters, sort, getFilters, page, onPage) {
         //await InnerDatabase.timer(1000);
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
@@ -160,6 +160,7 @@ export class InnerDatabase extends Database{
                 }
             }
 
+            //apply filters if needed
             if(filters) {
                 const {price, weight, categories} = filters;
                 if(price) {
@@ -182,6 +183,22 @@ export class InnerDatabase extends Database{
                             return  categories.indexOf(result.categoryId) !== -1
                         }
                     )
+                }
+            }
+
+            if(sort) {
+                switch(sort) {
+                    case 'title':
+                        results.sort((x, y) => x.dish.title <= y.dish.title ? -1 : 1);
+                        break;
+                    case 'price':
+                        results.sort((x, y) => x.dish.price - y.dish.price);
+                        break;
+                    case 'weight':
+                        results.sort((x, y) => x.dish.weight - y.dish.weight);
+                        break;
+                    default:
+                        throw new Error('Невідоме значення параметру sort');
                 }
             }
 

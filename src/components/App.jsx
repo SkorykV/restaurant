@@ -46,7 +46,7 @@ class MyApp extends Component {
     componentWillReceiveProps(nextProps) {
 
         const {location, history: {action}} = nextProps;
-        if (location !== this.props.location && action === 'PUSH') {
+        if (location.pathname !== this.props.location.pathname && action === 'PUSH') {
             // new navigation - scroll to top
             window.scrollTo(0, 0);
         }

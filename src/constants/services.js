@@ -18,4 +18,19 @@ export const servicesC = {
     },
     reservationPeriod: 30,
     minReservationTime: 60,
+    sortOptions: [
+        {
+            label: 'За назвою страви',
+            value: 'title',
+        },
+        {
+            label: 'За ціною страви',
+            value: 'price',
+        },
+        {
+            label: 'За вагою страви',
+            value: 'weight',
+        },
+    ],
+    defaultSortOption: 0,
 };

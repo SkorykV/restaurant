@@ -1,4 +1,5 @@
 import {BaseService} from "./BaseService";
+import {ServiceResponse} from "../core/ServiceResponse";
 
 export class RestaurantService extends BaseService{
 
@@ -7,9 +8,18 @@ export class RestaurantService extends BaseService{
     }
 
     async getDishesByParams(restaurantId,
-                            {query='', filters=null} = { query:'', filters:null},
+                            {query='', filters=null, sort=null} = { query:'', filters:null, sort: null},
                             {getFilters=false, page=null, onPage=null} = {getFilters:false, page:null, onPage:null}) {
-        return await this.database.getDishesByParams(restaurantId, query, filters, getFilters, page, onPage);
+        try {
+            const result = await this.database.getDishesByParams(restaurantId, query, filters, sort, getFilters, page, onPage);
+            if(result) {
+                return new ServiceResponse(true, result, null);
+            }
+            return new ServiceResponse(false, null, "Ресторану з таким ідентифікатором не існує");
+        }
+        catch(e) {
+            return new ServiceResponse(false, null, e.message);
+        }
     }
 
     async getRestaurantStructure(restaurantId) {

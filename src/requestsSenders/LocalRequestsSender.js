@@ -19,10 +19,10 @@ export class LocalRequestsSender {
 
     static async getDishesByParamsRequest(restaurantId, requestParams, responseParams) {
         const response = await LocalHandler.getDishesByParams(restaurantId, requestParams, responseParams);
-        if(response === null) {
-            throw new Error('something went wrong')
+        if(!response.status) {
+            throw new Error(response.error);
         }
-        return response;
+        return response.data;
     }
 
     static async getRestaurantStructureRequest(restaurantId) {
