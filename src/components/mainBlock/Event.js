@@ -65,12 +65,12 @@ export class Event extends Component {
             <div className="content-col content-col-lg content-col-padding">
                 <h2 className="title">{event.title}</h2>
                 <div className="event-params">
-                    <span className="event-info event-info-md">
-                        <FontAwesomeIcon className="event-icon" icon={faCalendarAlt} />
+                    <span className="icon-info icon-info-md">
+                        <FontAwesomeIcon className="icon" icon={faCalendarAlt} />
                         <span>{date}</span>
                     </span>
-                    <span className="event-info event-info-md">
-                        <FontAwesomeIcon className="event-icon" icon={faClock} />
+                    <span className="icon-info icon-info-md">
+                        <FontAwesomeIcon className="icon" icon={faClock} />
                         <span>{time}</span>
                     </span>
                 </div>
@@ -82,8 +82,8 @@ export class Event extends Component {
                             </p>
                     )
                 }
-                <p className="event-info event-info-md vertically-centered">
-                        <FontAwesomeIcon className="event-icon" icon={faTicketAlt} />
+                <p className="icon-info icon-info-md vertically-centered">
+                        <FontAwesomeIcon className="icon" icon={faTicketAlt} />
                         <span>{`${event.price} грн`}</span>
                 </p>
             </div>

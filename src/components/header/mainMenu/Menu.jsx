@@ -65,7 +65,7 @@ export class Menu extends Component {
                     </DropDownMenuItem>
                     <DefaultMenuItem link={'/events'} >Заходи</DefaultMenuItem>
                     <DefaultMenuItem link={'/reservation'} >Забронювати столик</DefaultMenuItem>
-                    <DefaultMenuItem link={'/about'} >Про нас</DefaultMenuItem>
+                    <DefaultMenuItem link={'/contacts'} >Контакти</DefaultMenuItem>
                     {
                        !this.props.user && <CustomMenuItem active={this.props.loginModalShow} onClick={this.props.onLoginModalOpen}>Увійти</CustomMenuItem>
                     }

@@ -1,8 +1,9 @@
 
 .image-gallery {
-  width: 80%;
+  width: 50%;
   max-width: 1000px;
   min-width: 500px;
+  margin: 0 auto;
   .selected-image-container {
     padding: 5px;
     border: 1px solid $light-gray-color;

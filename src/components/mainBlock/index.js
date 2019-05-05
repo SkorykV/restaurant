@@ -1,4 +1,4 @@
-export * from './AboutUs'
+export * from './Contacts'
 export * from './Events'
 export * from './Event'
 export * from './Category'

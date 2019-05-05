@@ -56,16 +56,16 @@ export class Events extends Component {
                                 link={`/events/${event.id}`}
                                 key={event.id}
                             >
-                                <p className="event-info-sm">
-                                    <FontAwesomeIcon className="event-icon" icon={faCalendarAlt} />
+                                <p className="icon-info-sm">
+                                    <FontAwesomeIcon className="icon" icon={faCalendarAlt} />
                                     <span>{date}</span>
                                 </p>
-                                <p className="event-info-sm">
-                                    <FontAwesomeIcon className="event-icon" icon={faClock} />
+                                <p className="icon-info-sm">
+                                    <FontAwesomeIcon className="icon" icon={faClock} />
                                     <span>{time}</span>
                                 </p>
-                                <p className="event-info-sm">
-                                    <FontAwesomeIcon className="event-icon" icon={faTicketAlt} />
+                                <p className="icon-info-sm">
+                                    <FontAwesomeIcon className="icon" icon={faTicketAlt} />
                                     <span>{`${event.price} грн`}</span>
                                 </p>
                             </Card>

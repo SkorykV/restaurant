@@ -2,6 +2,10 @@
   display: flex;
   color: $gray-color;
 
+  .title {
+    color: $gray-color;
+  }
+
   .img-col {
     img {
       display:block;

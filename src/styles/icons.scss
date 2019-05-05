@@ -1,4 +1,4 @@
-.event-info {
+.icon-info {
   margin: 10px 0 0;
 
   &:first-child{
@@ -6,9 +6,9 @@
   }
 }
 
-.event-info-sm {
+.icon-info-sm {
 
-  .event-icon {
+  .icon {
     width: 16px;
     height: 16px;
   }
@@ -19,8 +19,8 @@
   }
 }
 
-.event-info-md {
-  .event-icon {
+.icon-info-md {
+  .icon {
     width: 20px;
     height: 20px;
   }
@@ -30,13 +30,30 @@
   }
 }
 
+.icon-info-lg {
+  display: inline-flex;
+  align-items: center;
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+  span {
+    font-size: 1.2em;
+    margin-left: 10px;
+  }
+}
+
+.black-icon {
+  color: black;
+}
+
 .event-params {
   margin-top: 10px;
-  .event-info {
+  .icon-info {
     margin-top: 0;
   }
 
-  .event-info:nth-child(n+2) {
+  .icon-info:nth-child(n+2) {
     margin-left: 10px;
   }
 }

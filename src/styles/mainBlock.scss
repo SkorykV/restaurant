@@ -1,12 +1,34 @@
 @import "category";
 @import "item-page";
 @import "dish";
-@import "event";
+@import "icons";
 @import "search-results";
 @import "cards-layout";
 @import "main-page";
 
 .main-block {
   padding: 75px 50px;
+
+  h2 {
+    margin-top: 0;
+    font-size: 2em;
+    color: black;
+  }
+  .item-description {
+    font-size: 1.2em;
+  }
+
+  .google-map {
+    width: 600px;
+    height: 450px;
+    margin: 0 auto;
+    background-size: cover;
+    background: url("../images/map.jpg") center center;
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 

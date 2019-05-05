@@ -10,7 +10,7 @@ import { Header } from './header'
 import {
     Dish,
     Category,
-    AboutUs,
+    Contacts,
     Events,
     Event,
     MainPageSlider, MainPageContent,
@@ -115,7 +115,7 @@ class MyApp extends Component {
             <section className="main-block">
                 <Switch>
                     <Route exact path="/" component={MainPageContent}/>
-                    <Route exact path="/about" component={AboutUs} />
+                    <Route exact path="/contacts" component={Contacts} />
                     <Route exact path="/reservation" render={
                         (routeProps) => (
                             <Reservation {...routeProps} user={this.state.user} onLoginModalOpen={this.handleLoginModalOpen} />
