@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 export const Card = ({image='', title='Title', link='/', children}) => {
     return (
-        <div className="card">
+        <div className="card breakable">
             <div className="image-box" style={{backgroundImage: `url(${image})`}}>
             </div>
             <div className="card-content">
