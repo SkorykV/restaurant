@@ -19,9 +19,9 @@ export class LocalHandler {
         return await service.getCategories(restaurantId);
     }
 
-    static async getCategoryDishes(restaurantId, categoryId, page) {
+    static async getCategoryDishes(restaurantId, categoryId, page, onPage) {
         const service = new CategoryService(DatabaseImplementation);
-        return await service.getCategoryDishes(restaurantId, categoryId, page);
+        return await service.getCategoryDishes(restaurantId, categoryId, page, onPage);
     }
 
     static async getDishesByParams(restaurantId, requestParams, responseParams) {

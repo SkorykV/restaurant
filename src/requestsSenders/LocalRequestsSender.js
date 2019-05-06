@@ -2,19 +2,27 @@ import { LocalHandler } from "../handlers";
 
 export class LocalRequestsSender {
     static async getDishRequest(restaurantId, categoryId, dishId) {
-        return await LocalHandler.getDish(restaurantId, categoryId, dishId);
+        const response = await LocalHandler.getDish(restaurantId, categoryId, dishId);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
     }
 
     static async getCategoriesRequest(restaurantId) {
-        return await LocalHandler.getCategories(restaurantId);
+        const response = await LocalHandler.getCategories(restaurantId);
+        if(!response.status) {
+            throw new Error(response.error);
+        }
+        return response.data;
     }
 
-    static async getCategoryDishesRequest(restaurantId, categoryId, page) {
-        const response = await LocalHandler.getCategoryDishes(restaurantId, categoryId, page);
-        if(response === null) {
-            throw new Error('something went wrong')
+    static async getCategoryDishesRequest(restaurantId, categoryId, page, onPage) {
+        const response = await LocalHandler.getCategoryDishes(restaurantId, categoryId, page, onPage);
+        if(!response.status) {
+            throw new Error(response.error);
         }
-        return response;
+        return response.data;
     }
 
     static async getDishesByParamsRequest(restaurantId, requestParams, responseParams) {
@@ -27,10 +35,10 @@ export class LocalRequestsSender {
 
     static async getRestaurantStructureRequest(restaurantId) {
         const response = await LocalHandler.getRestaurantStructure(restaurantId);
-        if(response === null) {
-            throw new Error('something went wrong')
+        if(!response.status) {
+            throw new Error(response.error);
         }
-        return response;
+        return response.data;
     }
 
     static async getUserByUsernamePassword(username, password) {

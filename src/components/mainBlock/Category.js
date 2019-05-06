@@ -31,17 +31,17 @@ export class Category extends Component {
         }
 
         const categoryId = this.props.match.params.categoryId;
-        LocalRequestsSender.getCategoryDishesRequest('myFirstRestaurant', categoryId, currentPage).then(
+        LocalRequestsSender.getCategoryDishesRequest('myFirstRestaurant', categoryId, currentPage, uiC.pagination.onPage).then(
             data => {
 
                 this.setState({
                     currentPage,
                     totalPages: data.totalPages,
-                    dishes: data.content.dishes,
+                    dishes: data.dishes,
                     isLoading: false,
                 })
             },
-            error => { this.setState({isLoading: false, error })}
+            error => { this.setState({isLoading: false, error: error.message })}
         );
     }
 
@@ -61,7 +61,7 @@ export class Category extends Component {
             return <h2>Почекайте, будь ласка, категорія меню завантажується</h2>
         }
         if(this.state.error){
-            return <h2>Вибачте, щось пішло не так</h2>
+            return <h2>{this.state.error}</h2>
         }
         if(!this.state.dishes.length){
             if(this.state.totalPages === 0) {

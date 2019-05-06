@@ -21,7 +21,7 @@ export class Dish extends Component {
             data => {
 
                 this.setState({
-                    dish: data,
+                    dish: data.dish,
                     isLoading: false,
                 })
             },

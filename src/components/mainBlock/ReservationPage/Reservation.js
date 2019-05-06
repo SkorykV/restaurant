@@ -47,11 +47,11 @@ export class Reservation extends Component {
             data => {
 
                 this.setState({
-                    restaurantStructure: data,
+                    restaurantStructure: data.restaurantStructure,
                     isLoadingStructure: false,
                 })
             },
-            error => { this.setState({isLoadingStructure: false, error })}
+            error => { this.setState({isLoadingStructure: false, error: error.message })}
         );
     }
 
@@ -155,7 +155,7 @@ export class Reservation extends Component {
             return <h2>Почекайте, будь ласка, структура ресторану завантажується</h2>
         }
         if(this.state.error && !restaurantStructure){
-            return <h2>Вибачте, щось пішло не так.</h2>
+            return <h2>{this.state.error}</h2>
         }
         if(!restaurantStructure) {
             return <div />

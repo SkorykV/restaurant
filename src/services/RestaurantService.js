@@ -4,7 +4,11 @@ import {ServiceResponse} from "../core/ServiceResponse";
 export class RestaurantService extends BaseService{
 
     async getCategories(restaurantId) {
-        return await this.database.getCategories(restaurantId);
+        const categories = await this.database.getCategories(restaurantId);
+        if(categories !== null) {
+            return new ServiceResponse(true, {categories}, null);
+        }
+        return new ServiceResponse(false, null, 'Меню даного ресторану відсутнє');
     }
 
     async getDishesByParams(restaurantId,
@@ -23,6 +27,10 @@ export class RestaurantService extends BaseService{
     }
 
     async getRestaurantStructure(restaurantId) {
-        return await this.database.getRestaurantStructure(restaurantId);
+        const restaurantStructure = await this.database.getRestaurantStructure(restaurantId);
+        if(restaurantStructure !== null) {
+            return new ServiceResponse(true, {restaurantStructure}, null);
+        }
+        return new ServiceResponse(false, null, 'В даному ресторані немає можливості бронювання столику');
     }
 }

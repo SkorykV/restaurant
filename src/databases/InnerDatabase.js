@@ -4,7 +4,6 @@ import { dbC } from "../constants";
 import {Category, Dish} from "../core/menu";
 
 import {Database} from "./Database";
-import {ContentPage} from "../core/pagination";
 import {RestaurantStructure} from "../core/RestaurantStructure";
 
 
@@ -93,15 +92,14 @@ export class InnerDatabase extends Database{
                     dish => (new Dish(dish)).getOverview()
                 );
                 const totalPages = Math.ceil(category.dishes.length / onPage);
-                // TODO: review if will not have title anywhere, dont return it from database
-                return new ContentPage({title: category.title, dishes}, totalPages);
+                return { dishes, totalPages }
             }
         }
         return null;
     }
 
     async getDishesByParams(restaurantId, query, filters, sort, getFilters, page, onPage) {
-        //await InnerDatabase.timer(1000);
+
         const restaurant = InnerDatabase.getDatabase().restaurants.find((restaurant) => restaurant.id === restaurantId);
         if(restaurant) {
             let results =  restaurant.menuCategories.flatMap(

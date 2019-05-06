@@ -20,7 +20,7 @@ export class Menu extends Component {
         this.setState({isLoading: true});
         LocalRequestsSender.getCategoriesRequest('myFirstRestaurant').then(
             data => {
-                const menuCategories = data.map(
+                const menuCategories = data.categories.map(
                     category => ({
                         data:
                             {
@@ -36,7 +36,7 @@ export class Menu extends Component {
                     isLoading: false,
                 })
             },
-            error => { this.setState({isLoading: false, error })}
+            error => { this.setState({isLoading: false, error: error.message })}
         );
     }
 
@@ -52,17 +52,16 @@ export class Menu extends Component {
                     <span />
                 </label>
                 <ul className="main-menu">
-                    <DropDownMenuItem active={true} text={'Меню'}>
-                        {
-                            !!menu.length && menu.map(
-                                item => <DefaultMenuItem link={item.data.link} key={item.key} >{item.data.text}</DefaultMenuItem>
-                            )
-                        }
-                        {
-                            !menu.length && this.state.isLoading &&
-                            <CustomMenuItem >Завантажується</CustomMenuItem>
-                        }
-                    </DropDownMenuItem>
+                    {
+                        !this.state.isLoading && !this.state.error &&
+                        <DropDownMenuItem active={true} text={'Меню'}>
+                            {
+                                menu.map(
+                                    item => <DefaultMenuItem link={item.data.link} key={item.key} >{item.data.text}</DefaultMenuItem>
+                                )
+                            }
+                        </DropDownMenuItem>
+                    }
                     <DefaultMenuItem link={'/events'} >Заходи</DefaultMenuItem>
                     <DefaultMenuItem link={'/reservation'} >Забронювати столик</DefaultMenuItem>
                     <DefaultMenuItem link={'/contacts'} >Контакти</DefaultMenuItem>
