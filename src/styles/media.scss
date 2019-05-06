@@ -187,6 +187,12 @@
   .default-form-label .input-time .inputs {
     justify-content: space-between;
   }
+
+  .main-block {
+    .google-map {
+      width: 100%;
+    }
+  }
 }
 
 @media only screen and (max-width: 600px) {
