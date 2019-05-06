@@ -4,7 +4,7 @@ import {LocalRequestsSender} from "../../requestsSenders";
 import {Pagination} from "../pagination";
 import { simpleSearchParamsParse } from '../../lib';
 import { uiC } from "../../constants";
-import {DishOverview} from "./DishOverview";
+import {Card} from "../cards";
 
 export class Category extends Component {
 
@@ -70,11 +70,33 @@ export class Category extends Component {
             return <h2>Вибачте, але в даній категорії замало страв</h2>
         }
         return <div className="category">
-            <div className="category-content">
+            <div className="cards-container category-content">
                 {
                     this.state.dishes.map(
-                        dish =>
-                            <DishOverview categoryId={categoryId} dish={dish} key={dish.id}/>
+                        dish =>{
+                            return (
+                                    <Card
+                                        image={require(`../../images/menu/dishes/${dish.image}`)}
+                                        title={dish.title}
+                                        link={`/category/${categoryId}/dish/${dish.id}`}
+                                        key={dish.id}
+                                    >
+                                        <div className="additional-params">
+                                            <div className="dish-weight">
+                                                <span>
+                                                    {`${dish.weight} г`}
+                                                </span>
+                                            </div>
+                                            <div className="dish-price">
+                                                <span>
+                                                    {`${dish.price} грн`}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </Card>
+                                )
+                        }
+
                     )
                 }
             </div>

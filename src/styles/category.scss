@@ -1,38 +1,24 @@
 .category-content {
-  text-align: center;
+  .card{
 
-  .dishOverview {
-    display: inline-block;
-    width: 25%;
-    padding: 3%;
-    border: 2px solid rgba(134, 134, 134, 0);
-    -webkit-transition: 0.5s border;
-    -moz-transition: 0.5s border;
-    -o-transition: 0.5s border;
-    transition: 0.5s border;
-    text-align: center;
-
-    &:hover {
-      border: 2px solid rgba(134, 134, 134, 0.5);
-    }
-
-    a {
-      display: block;
-      cursor: pointer;
-      text-decoration: none;
-      color: $gray-color;
-
-      .dish-img {
-        display:block;
-        width:100%;
-      }
-
-      .dish-title {
-        margin: 20px 0;
-        font-size: 22px;
-        font-weight: normal;
+    .image-box {
+      width: 90%;
+      margin: 10px auto;
+      &:before{
+        padding-top: 100%;
       }
     }
+
+    .card-content {
+
+      .card-body {
+        margin-top: 10px;
+        .additional-params {
+          text-align: center;
+        }
+      }
+    }
+
   }
 }
 

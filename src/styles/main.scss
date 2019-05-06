@@ -38,6 +38,10 @@ $header-height: 50px;
   word-break: break-word;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   color: $gray-color;
   overflow-y: scroll;
