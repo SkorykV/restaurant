@@ -15,16 +15,16 @@
   }
 
   .img-col-lg {
-    flex: 0 0 50%;
+    flex: 1 1 50%;
     img {
       max-width: 400px;
     }
   }
 
   .img-col-md {
-    flex: 0 0 30%;
+    flex: 1 1 30%;
     img {
-      max-width: 200px;
+      max-width: 300px;
     }
   }
 
@@ -37,10 +37,6 @@
       font-weight: normal;
       text-transform: uppercase;
     }
-  }
-
-  .content-col-padding {
-    padding-left: 3%;
   }
 
   .content-col-lg {

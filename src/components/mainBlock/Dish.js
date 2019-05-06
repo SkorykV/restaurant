@@ -51,7 +51,7 @@ export class Dish extends Component {
             return <div />
         }
 
-        return <div className="item-page">
+        return <div className="item-page breakable">
             <div className="img-col img-col-lg">
                 <img src={require(`../../images/menu/dishes/${dish.image}`)} alt={dish.title} />
             </div>
@@ -65,15 +65,17 @@ export class Dish extends Component {
                             </p>
                     )
                 }
-                <div className="dish-weight">
-                    <span>
-                        {`${dish.weight} г`}
-                    </span>
-                </div>
-                <div className="dish-price">
-                    <span>
-                        {`${dish.price} грн`}
-                    </span>
+                <div className="additional-params">
+                    <div className="dish-weight">
+                        <span>
+                            {`${dish.weight} г`}
+                        </span>
+                    </div>
+                    <div className="dish-price">
+                        <span>
+                            {`${dish.price} грн`}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

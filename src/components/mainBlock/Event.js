@@ -58,7 +58,7 @@ export class Event extends Component {
 
         const {date, time} = getLocalDateTime(fullDate);
 
-        return <div className="item-page">
+        return <div className="item-page breakable">
             <div className="img-col img-col-md">
                 <img src={require(`../../images/events/${event.logoImage}`)} alt={event.title} />
             </div>
@@ -82,10 +82,12 @@ export class Event extends Component {
                             </p>
                     )
                 }
-                <p className="icon-info icon-info-md vertically-centered">
+                <div className="additional-params">
+                    <span className="icon-info icon-info-md">
                         <FontAwesomeIcon className="icon" icon={faTicketAlt} />
                         <span>{`${event.price} грн`}</span>
-                </p>
+                    </span>
+                </div>
             </div>
         </div>
     }

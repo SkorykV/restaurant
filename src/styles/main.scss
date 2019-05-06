@@ -45,6 +45,7 @@ html {
 body {
   color: $gray-color;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 main {
@@ -54,11 +55,6 @@ main {
 a {
   text-decoration: none;
   color: $gray-color;
-}
-
-.vertically-centered {
-  display: flex;
-  align-items: center;
 }
 
 .clearfix::after {
