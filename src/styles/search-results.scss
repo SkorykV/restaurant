@@ -1,11 +1,12 @@
-.search-results {
-  float: left;
-  padding-right: 50px;
-  width: 60%;
-  .search-results-content {
-    .dishOverview {
-      border-bottom: 1px solid $gray-color;
-      a{
+.search-page {
+  display: flex;
+
+  .search-results {
+    flex: 1 0 60%;
+    padding-right: 50px;
+    .search-results-content {
+      .dishOverview {
+        border-bottom: 1px solid $gray-color;
         display: flex;
         height: 200px;
         padding: 20px;
@@ -17,7 +18,7 @@
           align-self: center;
         }
         .dish-params {
-          flex: 1 0 auto;
+          flex: 1 0 0;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -26,57 +27,62 @@
             text-align: center;
             margin-top: 0;
           }
+          .result-details {
+            margin-top: 10px;
+            text-align: right;
+            font-size: 0.875rem;
+            text-decoration: underline;
+          }
         }
       }
+
     }
-
-  }
-  .search-results-pagination {
-    text-align: right;
-    margin-top: 20px;
-  }
-}
-
-.search-params{
-  float: right;
-  width: 40%;
-  .search-filters, .search-sort {
-    padding: 20px 50px;
-    border: 1px solid $light-gray-color;
-    text-align: center;
-
-    &:nth-child(n+2) {
+    .search-results-pagination {
+      text-align: right;
       margin-top: 20px;
     }
+  }
 
-    .filters-title {
-      margin-top: 0;
-      text-align: center;
-    }
-
-    .sort-filter {
-
-      margin: 0 auto;
-      padding: 0;
+  .search-params{
+    flex: 1 0 40%;
+    .search-filters, .search-sort {
+      padding: 20px 50px;
+      border: 1px solid $light-gray-color;
       text-align: center;
 
-      ul {
-        margin: 0;
+      &:nth-child(n+2) {
+        margin-top: 20px;
+      }
+
+      .filters-title {
+        margin-top: 0;
+        text-align: center;
+      }
+
+      .sort-filter {
+
+        margin: 0 auto;
         padding: 0;
-        display: inline-block;
-        list-style-type: none;
-        text-align: left;
-      }
+        text-align: center;
 
-      li {
-        cursor: pointer;
-        margin-top: 10px;
-        &.selected {
-          color: $dark-blue-color;
-          text-decoration: underline;
+        ul {
+          margin: 0;
+          padding: 0;
+          display: inline-block;
+          list-style-type: none;
+          text-align: left;
         }
-      }
 
+        li {
+          cursor: pointer;
+          margin-top: 10px;
+          &.selected {
+            color: $dark-blue-color;
+            text-decoration: underline;
+          }
+        }
+
+      }
     }
   }
 }

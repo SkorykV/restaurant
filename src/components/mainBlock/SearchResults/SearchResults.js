@@ -145,6 +145,8 @@ export class SearchResults extends Component {
             searchParams.sort = prevParams.sort;
         }
 
+        //always show 1 page when params change
+        delete searchParams.page;
 
         newLocation.search = createSearchStrFromObj(searchParams);
 
@@ -216,7 +218,7 @@ export class SearchResults extends Component {
         }
 
         return (
-            <div className="clearfix">
+            <div className="search-page">
                 <div className="search-results">
                     { content }
                 </div>

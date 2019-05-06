@@ -100,6 +100,16 @@
       margin-right: 0;
     }
   }
+
+  .search-page {
+    .search-results {
+      flex-basis: 55%;
+    }
+
+    .search-params {
+      flex-basis: 45%;
+    }
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -140,6 +150,18 @@
       .additional-params {
         text-align: right;
       }
+    }
+  }
+
+  .search-page {
+    flex-direction: column-reverse;
+    .search-results {
+      flex-basis: 55%;
+      padding-right: 0;
+    }
+
+    .search-params {
+      flex-basis: 45%;
     }
   }
 }
@@ -211,6 +233,16 @@
     }
   }
 
+  .search-page {
+
+    .search-params {
+      .search-filters, .search-sort {
+        .filters-title {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 414px) {

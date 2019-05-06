@@ -145,7 +145,7 @@ export class FiltersForm extends Component {
                     valueConverter={this.weightConverter}
                 />
                 { checkboxes }
-                <button type="submit" className="btn btn-submit" disabled={this.props.disabled}>Примінити фільтри</button>
+                <button type="submit" className="btn btn-submit" disabled={this.props.disabled}>Примінити</button>
             </form>
         )
     }
