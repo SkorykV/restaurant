@@ -57,11 +57,17 @@
           border-bottom: none;
         }
 
-        span {
+        input[type="checkbox"]:checked ~ .sub-menu {
+          display: block;
+        }
+
+        &:hover > .sub-menu {
+          display: none;
+        }
+
+        label {
           padding: 0;
           margin: 0;
-          border-bottom: 1px solid $gray-color;
-          cursor: auto;
         }
 
         a{
@@ -77,11 +83,13 @@
     }
 
     .sub-menu {
-      display: block;
       position: initial;
       background: none;
       li {
         width: 100%;
+        &:first-child {
+          border-top: 1px solid $gray-color;
+        }
       }
     }
   }

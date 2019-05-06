@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import {Redirect, withRouter} from "react-router";
+import {withRouter} from "react-router";
 import {
     Route,
     Switch,
@@ -13,7 +13,7 @@ import {
     Contacts,
     Events,
     Event,
-    MainPageSlider, MainPageContent,
+    MainPageSlider, MainPageContent, Page404,
 } from "./mainBlock";
 
 import {
@@ -128,7 +128,7 @@ class MyApp extends Component {
                         <Route exact path="/search" component={SearchResults} />
                         <Route exact path="/category/:categoryId" component={Category} />
                         <Route exact path="/category/:categoryId/dish/:dishId" component={Dish} />
-                        <Redirect to="/"/>
+                        <Route component={Page404} />
                     </Switch>
                 </section>
             </main>

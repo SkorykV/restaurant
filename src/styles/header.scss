@@ -147,14 +147,14 @@ nav {
             position: relative;
             display: inline-block;
 
-            a, span {
+            a, label {
                 display: block;
                 height: 30px;
                 line-height: 30px;
                 color: $gray-color;
                 text-decoration: none;
             }
-            a.selectedMenuItem {
+            a.selectedMenuItem, a:hover {
                 color: white;
             }
         }
@@ -163,16 +163,21 @@ nav {
     .main-menu {
         cursor: pointer;
         &>li {
-            height: $header-height;
+          height: $header-height;
 
-            >a, >span  {
-                margin: 10px 0;
-                padding: 0 20px;
-                border-right: 1px solid $gray-color;
-            }
-            &:last-child > a, &:last-child > span  {
-                border-right: none;
-            }
+          input[type="checkbox"] {
+            display: none;
+          }
+
+          >a, >label  {
+            cursor: pointer;
+            margin: 10px 0;
+            padding: 0 20px;
+            border-right: 1px solid $gray-color;
+          }
+          &:last-child > a, &:last-child > label  {
+              border-right: none;
+          }
         }
     }
 
@@ -190,10 +195,6 @@ nav {
             border-bottom: 1px solid $gray-color;
             text-align: center;
             width: 120px;
-
-            a:hover {
-                color: white;
-            }
 
             &:last-child {
                 border-bottom: none;
