@@ -1,83 +1,85 @@
-.restaurant-map {
-  width: 50%;
-  float: left;
-  h2 {
-    margin-top: 0;
-    text-align: center;
-  }
-
-  .restaurant-svg {
-    .table {
-      cursor: pointer;
-      &.reserved {
-        cursor: not-allowed;
-      }
-      rect {
-        box-sizing: border-box;
-        border: 1px solid black;
-      }
-      .small {
-        font-size: 0.7px;
-        font-weight: bold;
-      }
-    }
-  }
-  .info {
-    h3 {
+.reservation-page {
+  display: flex;
+  .restaurant-map {
+    flex: 1 0 50%;
+    h2 {
+      margin-top: 0;
       text-align: center;
     }
-    .symbols {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      li {
-        margin-top: 10px;
-        font-size: 1.125rem;
-        display: flex;
-        align-items: center;
-        &:first-of-type {
-          margin-top: 0;
+
+    .restaurant-svg {
+      .table {
+        cursor: pointer;
+        &.reserved {
+          cursor: not-allowed;
         }
-        span {
-          display: inline-block;
-          margin: 0 5px;
+        rect {
+          box-sizing: border-box;
+          border: 1px solid black;
         }
-        .marker {
-          flex: 0 0 auto;
-          width: 20px;
-          height: 20px;
+        .small {
+          font-size: 0.7px;
+          font-weight: bold;
         }
       }
     }
-    .notes {
-      list-style-type: none;
-      margin: 20px 0 0;
-      padding: 0;
-      li {
-        font-size: 0.8rem;
-        font-style: italic;
-        text-align: justify;
-        margin-top: 5px;
-        &:first-of-type {
-          margin-top: 0;
+    .info {
+      h3 {
+        text-align: center;
+      }
+      .symbols {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        li {
+          margin-top: 10px;
+          font-size: 1.125rem;
+          display: flex;
+          align-items: center;
+          &:first-of-type {
+            margin-top: 0;
+          }
+          span {
+            display: inline-block;
+            margin: 0 5px;
+          }
+          .marker {
+            flex: 0 0 auto;
+            width: 20px;
+            height: 20px;
+          }
         }
+      }
+      .notes {
+        list-style-type: none;
+        margin: 20px 0 0;
+        padding: 0;
+        li {
+          font-size: 0.8rem;
+          font-style: italic;
+          text-align: justify;
+          margin-top: 5px;
+          &:first-of-type {
+            margin-top: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .reservationTimeFilter {
+    flex: 1 0 50%;
+    padding-left: 50px;
+    h2{
+      margin-top: 0;
+      text-align: center;
+    }
+    .reservation-form {
+      text-align: center;
+      .btn-submit {
+        margin-top: 10px;
       }
     }
   }
 }
 
-.reservationTimeFilter {
-  float: right;
-  width: 50%;
-  padding-left: 50px;
-  h2{
-    margin-top: 0;
-    text-align: center;
-  }
-  .reservation-form {
-    text-align: center;
-    .btn-submit {
-      margin-top: 10px;
-    }
-  }
-}

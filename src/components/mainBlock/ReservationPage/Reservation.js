@@ -167,9 +167,9 @@ export class Reservation extends Component {
         );
 
         return (
-            <div className="clearfix">
+            <div className="reservation-page">
                 <div className="restaurant-map">
-                    <h2>Карта ресторану</h2>
+                    <h2>Схема ресторану</h2>
                     <Restaurant
                         restaurantStructure={restaurantStructure}
                         reservations={this.state.reservations}
@@ -178,7 +178,7 @@ export class Reservation extends Component {
                     />
                 </div>
                 <div className="reservationTimeFilter">
-                    <h2>Оберіть, будь ласка, дату і час</h2>
+                    <h2>Фільтри</h2>
                     <ReservationTimeFilter
                         error={this.state.error}
                         message={message}

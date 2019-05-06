@@ -156,13 +156,36 @@
   .search-page {
     flex-direction: column-reverse;
     .search-results {
-      flex-basis: 55%;
       padding-right: 0;
     }
+  }
 
-    .search-params {
-      flex-basis: 45%;
+  .reservation-page {
+    flex-direction: column-reverse;
+    .restaurant-map {
+      h2 {
+        margin-top: 10px;
+      }
     }
+
+    .reservationTimeFilter {
+      padding-left: 0;
+      h2 {
+        display: none;
+      }
+      .time-filters {
+        display: flex;
+        justify-content: space-between;
+        .default-form-label {
+          flex: 0 0 45%;
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .default-form-label .input-time .inputs {
+    justify-content: space-between;
   }
 }
 
@@ -243,6 +266,15 @@
       }
     }
   }
+
+  .reservationTimeFilter {
+    .time-filters {
+      flex-direction: column;
+      .default-form-label {
+        flex-grow: 1;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 414px) {
@@ -262,6 +294,14 @@
     &:nth-child(n+2) {
       margin-top: 20px;
     }
+  }
+
+  .big-label {
+    width: 100%;
+  }
+
+  .default-form-label .input-time .inputs {
+    justify-content: space-around;
   }
 }
 

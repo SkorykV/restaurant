@@ -110,32 +110,34 @@ export class ReservationTimeFilter extends Component {
                             <div className="input-error">{this.state.errors.date}</div>
                         }
                     </label>
-                    <label className="default-form-label big-label">
-                        Оберіть час початку бронювання:
-                        <InputTime
-                            min={this.props.minTime}
-                            max={this.props.maxTime}
-                            value={this.state.startTime}
-                            onChange={this.startTimeChangeHandler}
-                        />
-                        {
-                            this.state.errors && this.state.errors.startTime &&
-                            <div className="input-error">{this.state.errors.startTime}</div>
-                        }
-                    </label>
-                    <label className="default-form-label big-label">
-                        Оберіть час завершення бронювання:
-                        <InputTime
-                            min={this.props.minTime}
-                            max={this.props.maxTime}
-                            value={this.state.endTime}
-                            onChange={this.endTimeChangeHandler}
-                        />
-                        {
-                            this.state.errors && this.state.errors.endTime &&
-                            <div className="input-error">{this.state.errors.endTime}</div>
-                        }
-                    </label>
+                    <div className="time-filters">
+                        <label className="default-form-label big-label">
+                            Оберіть час початку бронювання:
+                            <InputTime
+                                min={this.props.minTime}
+                                max={this.props.maxTime}
+                                value={this.state.startTime}
+                                onChange={this.startTimeChangeHandler}
+                            />
+                            {
+                                this.state.errors && this.state.errors.startTime &&
+                                <div className="input-error">{this.state.errors.startTime}</div>
+                            }
+                        </label>
+                        <label className="default-form-label big-label">
+                            Оберіть час завершення бронювання:
+                            <InputTime
+                                min={this.props.minTime}
+                                max={this.props.maxTime}
+                                value={this.state.endTime}
+                                onChange={this.endTimeChangeHandler}
+                            />
+                            {
+                                this.state.errors && this.state.errors.endTime &&
+                                <div className="input-error">{this.state.errors.endTime}</div>
+                            }
+                        </label>
+                    </div>
                     {
                         this.props.error &&
                         <div className="form-alert form-alert-error">{this.props.error}</div>
