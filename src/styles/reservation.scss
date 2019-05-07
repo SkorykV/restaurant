@@ -6,8 +6,21 @@
       margin-top: 0;
       text-align: center;
     }
+    .restaurant-container {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      .scheme {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
 
     .restaurant-svg {
+      width: 100%;
       .table {
         cursor: pointer;
         &.reserved {

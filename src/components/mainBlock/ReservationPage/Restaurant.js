@@ -25,65 +25,69 @@ export const Restaurant = ({restaurantStructure, reservations=[], user=null, onT
 
     return (
         <div>
-            <svg className="restaurant-svg" viewBox={`0 0 ${restaurantStructure.size.width+2*restaurantBorderWidth} ${restaurantStructure.size.height+2*restaurantBorderWidth}`} xmlns="http://www.w3.org/2000/svg">
-                <rect
-                    x={restaurantBorderWidth/2}
-                    y={restaurantBorderWidth/2}
-                    width={restaurantStructure.size.width+restaurantBorderWidth}
-                    height={restaurantStructure.size.height+restaurantBorderWidth}
-                    stroke={colors.border.color} strokeWidth={restaurantBorderWidth} fill="white"
-                />
-                {
-                    restaurantStructure.tables.map(
-                        table => {
-                            const reservation = reservations && reservations.find(_ => _.tableId === table.id);
-                            const reservedByCurrentUser = user && reservation && reservation.full && reservation.userId === user.id;
-                            const disabled = !reservations || (reservation && !reservedByCurrentUser);
+            <div className="restaurant-container">
+                <div className="scheme">
+                    <svg className="restaurant-svg" preserveAspectRatio="xMidYMax meet" viewBox={`0 0 ${restaurantStructure.size.width+2*restaurantBorderWidth} ${restaurantStructure.size.height+2*restaurantBorderWidth}`} xmlns="http://www.w3.org/2000/svg">
+                        <rect
+                            x={restaurantBorderWidth/2}
+                            y={restaurantBorderWidth/2}
+                            width={restaurantStructure.size.width+restaurantBorderWidth}
+                            height={restaurantStructure.size.height+restaurantBorderWidth}
+                            stroke={colors.border.color} strokeWidth={restaurantBorderWidth} fill="white"
+                        />
+                        {
+                            restaurantStructure.tables.map(
+                                table => {
+                                    const reservation = reservations && reservations.find(_ => _.tableId === table.id);
+                                    const reservedByCurrentUser = user && reservation && reservation.full && reservation.userId === user.id;
+                                    const disabled = !reservations || (reservation && !reservedByCurrentUser);
 
-                            let color = colors.empty.color;
-                            if(reservation) {
-                                if(reservedByCurrentUser) {
-                                    color = colors.reservedByUser.color
-                                }
-                                else {
-                                    color = colors.reserved.color;
-                                }
-                            }
-                            else if(reservations) {
-                                color = colors.free.color;
-                            }
+                                    let color = colors.empty.color;
+                                    if(reservation) {
+                                        if(reservedByCurrentUser) {
+                                            color = colors.reservedByUser.color
+                                        }
+                                        else {
+                                            color = colors.reserved.color;
+                                        }
+                                    }
+                                    else if(reservations) {
+                                        color = colors.free.color;
+                                    }
 
-                            return (
-                                <g
-                                    className={"table" + (disabled ? " reserved" : "")}
-                                    key={table.id}
-                                    onClick={!disabled ? () => handleTableClick(table, reservation, reservedByCurrentUser) : null}
-                                >
-                                    <rect
-                                        x={restaurantBorderWidth+table.position.x + tableBorderWidth/2}
-                                        y={restaurantBorderWidth+table.position.y + tableBorderWidth/2}
-                                        width={table.size.width - tableBorderWidth}
-                                        height={table.size.height - tableBorderWidth}
-                                        stroke={color}
-                                        strokeWidth={tableBorderWidth}
-                                        fill="white"
-                                    />
-                                    <text
-                                        x={restaurantBorderWidth+table.position.x + table.size.width / 2}
-                                        y={restaurantBorderWidth+table.position.y + table.size.height / 2}
-                                        dominantBaseline="middle"
-                                        textAnchor="middle"
-                                        className="small"
-                                        fill={color}
-                                    >
-                                        {table.number}
-                                    </text>
-                                </g>
+                                    return (
+                                        <g
+                                            className={"table" + (disabled ? " reserved" : "")}
+                                            key={table.id}
+                                            onClick={!disabled ? () => handleTableClick(table, reservation, reservedByCurrentUser) : null}
+                                        >
+                                            <rect
+                                                x={restaurantBorderWidth+table.position.x + tableBorderWidth/2}
+                                                y={restaurantBorderWidth+table.position.y + tableBorderWidth/2}
+                                                width={table.size.width - tableBorderWidth}
+                                                height={table.size.height - tableBorderWidth}
+                                                stroke={color}
+                                                strokeWidth={tableBorderWidth}
+                                                fill="white"
+                                            />
+                                            <text
+                                                x={restaurantBorderWidth+table.position.x + table.size.width / 2}
+                                                y={restaurantBorderWidth+table.position.y + table.size.height / 2}
+                                                dominantBaseline="middle"
+                                                textAnchor="middle"
+                                                className="small"
+                                                fill={color}
+                                            >
+                                                {table.number}
+                                            </text>
+                                        </g>
+                                    )
+                                }
                             )
                         }
-                    )
-                }
-            </svg>
+                    </svg>
+                </div>
+            </div>
             <div className="info">
                 <h3>Позначення</h3>
                 <ul className="symbols">

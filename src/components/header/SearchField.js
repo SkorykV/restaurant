@@ -23,11 +23,14 @@ export class SearchField extends Component {
         };
     }
 
-    handleCollapse() {
+    handleCollapse(event) {
+        if(event && event.nativeEvent) {
+            event.nativeEvent.stopImmediatePropagation();
+        }
 
-        this.setState({
-            collapsed: !this.state.collapsed,
-        },() =>{
+        this.setState((prevState)=> ({
+            collapsed: !prevState.collapsed,
+        }),() =>{
             if(this.state.collapsed) {
                 document.removeEventListener('click', this.handleCollapse);
             }
@@ -47,9 +50,7 @@ export class SearchField extends Component {
 
     handleSearchFieldSubmit(event) {
         event.preventDefault();
-        this.handleCollapse();
         this.props.onSubmit(this.state.searchValue);
-        this.setState({ searchValue: '' });
     }
 
     componentWillUnmount() {

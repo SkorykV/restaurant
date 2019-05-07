@@ -184,6 +184,8 @@ nav {
     .sub-menu{
         display: none;
         z-index: 4;
+        min-width: 120px;
+        max-width: 250px;
 
         position: absolute;
         top: $header-height;
@@ -194,10 +196,16 @@ nav {
         li {
             border-bottom: 1px solid $gray-color;
             text-align: center;
-            width: 120px;
+            width: 100%;
 
             &:last-child {
                 border-bottom: none;
+            }
+
+            a {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
             }
         }
 
