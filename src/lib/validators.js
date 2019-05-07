@@ -46,7 +46,7 @@ export function getDateValidator(min, max) {
             return {status: true, error: null}
         }
         else {
-            return {status: false, error: `Зараз бронювання можливе лише на дні від ${minDate.toISOString().slice(0,10)} до ${maxDate.toISOString().slice(0,10)}`}
+            return {status: false, error: `Зараз бронювання можливе лише на дні від ${min.toISOString().slice(0,10)} до ${max.toISOString().slice(0,10)}`}
         }
     }
 }
