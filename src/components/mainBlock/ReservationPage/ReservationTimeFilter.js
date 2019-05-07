@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {InputTime} from "../../form-inputs";
 import {servicesC, timeShape} from "../../../constants";
-import {getDateValidator, getTimeValidator, addDays} from "../../../lib";
+import {getDateValidator, getTimeValidator, addDays, getLocalDateString} from "../../../lib";
 
 export class ReservationTimeFilter extends Component {
 
@@ -101,8 +101,8 @@ export class ReservationTimeFilter extends Component {
                             type="date"
                             placeholder="рррр-мм-дд"
                             value={this.state.date}
-                            min={this.props.minDate.toISOString().slice(0,10)}
-                            max={this.props.maxDate.toISOString().slice(0,10)}
+                            min={getLocalDateString(this.props.minDate)}
+                            max={getLocalDateString(this.props.maxDate)}
                             onChange={this.handleDateChange}
                         />
                         {
@@ -150,7 +150,7 @@ export class ReservationTimeFilter extends Component {
                 </form>
 
             </div>
-        )
+        );
     }
 }
 

@@ -25,3 +25,10 @@ export function getLocalDateTime(date) {
     const parts = date.toLocaleString('uk-UA', options).split(', ');
     return {date: parts.slice(0,2).join(', '), time: parts[2]}
 }
+
+//convert date to yyyy-month-day
+export function getLocalDateString(date) {
+    const month = date.getMonth()+1;
+    const day = date.getDate();
+    return `${date.getFullYear()}-${month < 10 ? '0'+month : month}-${day < 10 ? '0' + day : day}`
+}
